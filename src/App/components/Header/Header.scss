@@ -1,0 +1,57 @@
+.header{
+  height: 120px;
+  border-bottom: 2px solid #F3F3F3;
+  display: flex;
+  justify-content: space-around; /*Центрирование по горизонтали*/
+  /*можно попробовать space-evenly или space-between*/
+  align-items: center;     /*Центрирование по вертикали */
+}
+
+.header-left{
+  display: flex;
+  justify-content: center; /*Центрирование по горизонтали*/
+  align-items: center;     /*Центрирование по вертикали */
+}
+
+
+.header-img{
+  margin: 10px;
+}
+
+.header-middle{
+
+}
+
+.header-right{
+  vertical-align: middle
+}
+
+.header-link{
+  vertical-align: middle;
+  font-family: 'Eudoxus Sans', SansSerif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 180%;
+  letter-spacing: 0em;
+  text-align: left;
+  color: black;
+  padding: 0 30px;
+  text-decoration: none;
+}
+
+.header-link__selected{
+  vertical-align: middle;
+  font-family: 'Eudoxus Sans', SansSerif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 180%;
+  letter-spacing: 0em;
+  text-align: left;
+  padding: 0 30px;
+  text-decoration: none;
+  color: #518581;
+  padding-bottom: 49px;
+  border-bottom: 3px solid #518581;
+}

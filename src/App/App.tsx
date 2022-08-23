@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
-import Header from '../Header';
-import ProductDetail from "../Pages/ProductDetail";
-import Products from "../Pages/Products";
+import Header from './components/Header';
+import ProductDetail from "./Pages/ProductDetail";
+import Products from "./Pages/Products";
 
 
 const App = () => {
+
+
   return (
     <div className="App">
       <BrowserRouter>
