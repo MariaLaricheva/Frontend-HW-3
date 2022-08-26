@@ -1,0 +1,90 @@
+.product-display{
+  margin: auto;
+  width: 800px;
+  display: flex;
+  justify-content: center; /*Центрирование по горизонтали*/
+
+  font-family: 'Eudoxus Sans', SansSerif, serif;
+  text-align: left;
+
+  gap: 60px;
+}
+
+.product-image{
+  width: 600px;
+}
+
+.product-name{
+  /* Headings/H2 - Bold 44 */
+  text-align: left;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 130%;
+  /* or 57px */
+
+  /* Text Color */
+  color: #151411;
+
+}
+
+.product-category{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 180%;
+  /* or 32px */
+
+  /* Paragraph Color */
+  color: #AFADB5;
+
+}
+
+.product-description{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 180%;
+  /* or 32px */
+
+  /* Paragraph Color */
+  color: #AFADB5;
+}
+
+.product-price{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 130%;
+  /* or 57px */
+
+  /* Text Color */
+  color: #151411;
+}
+
+.product-actions{
+  display: flex;
+  justify-content: space-between; /*Центрирование по горизонтали*/
+  gap: 20px;
+}
+
+.product-actions-btn{
+  width: 285px;
+}
+
+.product-other{
+  font-family: 'Eudoxus Sans', SansSerif, serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 130%;
+  /* identical to box height, or 42px */
+
+  letter-spacing: 0.01em;
+
+  text-align: left;
+
+  /* Text Color */
+  color: #151411;
+
+}

@@ -1,11 +1,14 @@
-import "./ProductDetail.css";
-import { useParams } from 'react-router-dom';
+import "./ProductDetail.scss";
+import {useParams} from 'react-router-dom';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Product from "../../../@custom-types/product";
+import ProductList from "../../components/ProductList/ProductList";
+import Button from "../../components/Button";
+import {ButtonColor} from "../../components/Button/Button";
 
 const ProductDetail = () => {
-    // Получаем из урла айди товара
+    // Получаем из url id товара
     // (id, поскольку записали :id в path роута)
     const [product, setProduct] = useState<Product>()
     const { id } = useParams();
@@ -36,16 +39,17 @@ const ProductDetail = () => {
     function getProduct(){
         if (typeof product !== 'undefined'){
             return (
-                <div>
-                    <img src={product.image}></img>
+                <div className={'product-display'}>
+                    <img src={product.image} alt={"изображение отсутствует"}
+                            className={'product-image'}></img>
                     <div>
-                        <h2>{product.title}</h2>
-                        <h3>{product.category}</h3>
-                        <p>{product.description}</p>
-                        <div>{product.price}</div>
-                        <div>
-                            <button>Buy now</button>
-                            <button>Add to chart</button>
+                        <h2 className={'product-name'}>{product.title}</h2>
+                        <h3 className={'product-category'}>{product.category}</h3>
+                        <p  className={'product-description'}>{product.description}</p>
+                        <div className={'product-price'}>{'$'+product.price}</div>
+                        <div className={'product-actions'}>
+                            <Button color={ButtonColor.primary} className={'product-actions-btn'}>Buy now</Button>
+                            <Button color={ButtonColor.secondary} className={'product-actions-btn'}>Add to chart</Button>
                         </div>
                     </div>
                 </div>
@@ -55,12 +59,19 @@ const ProductDetail = () => {
         else {return ("нет такого :)")}
     }
 
+    const getCategory = () => {
+        if (typeof product !== 'undefined'){
+            return product.category;
+        }
+        else {return 'jewelery'}
+    }
+
     // Выводим  найденного товара
     return (
         <div>
             {getProduct()}
-            <h3>Related items</h3>
-
+            <h3 className={'product-other'}>Related items</h3>
+            <ProductList filter={[getCategory()]}></ProductList>
         </div>
     );
 };

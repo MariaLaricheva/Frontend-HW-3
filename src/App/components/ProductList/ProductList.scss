@@ -1,0 +1,6 @@
+.product-list{
+  display: flex;
+  justify-content: space-around; /*Центрирование по горизонтали*/
+  /*можно попробовать space-evenly или space-between*/
+  align-items: center;     /*Центрирование по вертикали */
+}

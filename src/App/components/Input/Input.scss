@@ -1,0 +1,51 @@
+.input-custom {
+    /* opacity: 0.7; */
+    /* control-drop-shadow */
+    height: 86px;
+    min-width: 300px;
+    font-size: 18px;
+    border: transparent;
+    padding: 0px 26px;
+}
+
+.input-custom:focus {
+    border: transparent;
+    outline: transparent;
+}
+
+.input-custom:disabled {
+    opacity: 0.7;
+}
+
+
+.search-bar{
+    margin-left: 10px;
+    width: 1020px;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;     /*Центрирование по вертикали */
+    background-color: white;
+    box-shadow: 0 4px 12px
+    rgba(175, 173, 181, 0.15);
+}
+
+.search-bar:focus-within{
+    border: transparent;
+    outline: 1px solid #518581;
+}
+
+.search-bar-img{
+    width: 24px;
+    padding: 30px 12px 30px 25px;
+    background-color: white;
+}
+
+.search-bar-input{
+    width: 720px;
+}
+
+.search-bar-btn-wrapper{
+    padding: 13.3px 26px;
+    background-color: white;
+}

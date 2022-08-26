@@ -1,0 +1,39 @@
+.card {
+    width: 360px;
+    height: 394px;
+    font-family: 'Eudoxus Sans', sans-serif;
+    position: relative;
+}
+
+.card-img {
+    width: 360px;
+    height: 360px;
+}
+
+.card-category {
+    position: relative;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 130%;
+    color: #AFADB5;
+}
+
+.card-title {
+    font-weight: 700;
+    font-size: 26px;
+    color: black;
+    position: relative;
+}
+
+.card-subtitle {
+    font-weight: 500;
+    font-size: 18px;
+    color: #AFADB5;
+    position: relative;
+}
+
+.card-price {
+    font-weight: 700;
+    font-size: 24px;
+    color: black;
+}
