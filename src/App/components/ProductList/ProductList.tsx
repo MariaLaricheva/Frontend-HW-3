@@ -32,35 +32,40 @@ const ProductList: React.FC<ProductListProps> = ({filter, limit}) => {
 
         //с методом set можно будет убрать дубликаты
         // setProducts([...new Set(   всё что ниже закомментированно   )])
-/*
-        setProducts(products.concat(result.data.map((raw: Product) =>
-            ({
-                id: raw.id,
-                title: raw.title,
-                category: raw.category,
-                description: raw.description,
-                image: raw.image,
-                price: raw.price,
-                rating: raw.rating
-            }))));
-*/
-        setProducts(result.data.map((raw: Product) =>
-            ({
-                id: raw.id,
-                title: raw.title,
-                category: raw.category,
-                description: raw.description,
-                image: raw.image,
-                price: raw.price,
-                rating: raw.rating
-            })));
+
+        /*
+                setProducts(products.concat(result.data.map((raw: Product) =>
+                    ({
+                        id: raw.id,
+                        title: raw.title,
+                        category: raw.category,
+                        description: raw.description,
+                        image: raw.image,
+                        price: raw.price,
+                        rating: raw.rating
+                  }))));
+
+        */
+                setProducts(result.data.map((raw: Product) =>
+                    ({
+                        id: raw.id,
+                        title: raw.title,
+                        category: raw.category,
+                        description: raw.description,
+                        image: raw.image,
+                        price: raw.price,
+                        rating: raw.rating
+                    })));
+
     };
 
     const getData = () => {
         if (filter.length !== 0){
+            setProducts([]);
             filter.map((category: Option) => {
-                fetch('https://fakestoreapi.com/products/category/'+category.value+'?limit='+limit);
+                fetch('https://fakestoreapi.com/products/category/'+category.value);
             })
+            setProducts(products.splice(0, limit))
         }
         else {
             fetch('https://fakestoreapi.com/products?limit='+limit);

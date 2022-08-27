@@ -12,6 +12,8 @@ const Total: React.FC<TotalProps> = ({filter}) => {
     const [total, setTotal] = useState<number>(0);
 
     useEffect(() => {
+        setTotal(0);
+
         if (filter.length !== 0){
             filter.map((category: string) => {
                 fetch('https://fakestoreapi.com/products/category/'+category);
@@ -20,7 +22,8 @@ const Total: React.FC<TotalProps> = ({filter}) => {
         else {
             fetch('https://fakestoreapi.com/products');
         }
-    }, [])
+
+    }, [filter])
 
     const fetch = async (address: string) => {
         const result = await axios({
@@ -28,7 +31,7 @@ const Total: React.FC<TotalProps> = ({filter}) => {
             url: address
         });
 
-        setTotal(total+result.data.length);
+        setTotal(result.data.length);
     };
 
 
