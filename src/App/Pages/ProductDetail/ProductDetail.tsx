@@ -69,7 +69,7 @@ const ProductDetail = () => {
             {getProduct()}
             <h3 className={'product-other'}>Related items</h3>
             {product &&
-            <ProductList filter={[getCategory()]} limit={3}></ProductList>}
+            <ProductList filter={[{key: '0', value: getCategory()}]} limit={3}></ProductList>}
         </div>
     );
 };

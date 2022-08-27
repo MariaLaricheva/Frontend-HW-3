@@ -54,13 +54,16 @@ const Filter: React.FC<MultiDropdownProps> = ({options, value,onChange,
     function changeValueArray(option: Option): void {   //возвращаем изменившийся список наверх, не меняя его самого
         let newValue: Option[] = [];
 
+        console.log('сейчас выбраны категории', value)
         if (value.some((element: Option) => element.key === option.key)) {
             //отфильтровать из value элемент option и положить в newValue
             newValue = value.filter((element: Option) =>  element.key !== option.key
             );
+            console.log('такое уже есть, убираем')
         } else {
             //newValue.concat(value, [option]);
             newValue = [...value, option];
+            console.log('такого ещё не было, добавляем')
         }
         onChange(newValue);
     }

@@ -13,11 +13,15 @@ import Total from "../../components/Total";
 
 const Products = () => {
 
-    const [categories, setCategories] = useState<Array<Option>>([])
-    const [limit, setLimit] = useState<number>(6)
-    const { id } = useParams();
+    const [categories, setCategories] = useState<Option[]>([]);
+    const [limit, setLimit] = useState<number>(6);
+    const [filter, setFilter] = useState<Option[]>([]);
 
-    useEffect(() => {fetch()},[]);
+    useEffect(() => {
+        fetch();
+        setLimit(6);
+    },[filter]);
+
 
     const fetch = async () => {
         const result = await axios({
@@ -27,16 +31,15 @@ const Products = () => {
         console.log('result', result);
         setCategories(result.data.map((raw: string, index: number) =>
             ({
-                id: index,
-                title: raw.toString(),
+                key: index,
+                value: raw.toString(),
             })));
         console.log('categories', categories);
     };
 
     window.onscroll = function(ev) {
-        if ((window.innerHeight + window.scrollY + 50) >= document.body.offsetHeight) {
+        if ((window.innerHeight + window.scrollY + 5) >= document.body.offsetHeight) {
             console.log('МЫ ВНИЗУ');
-
             if (limit < 20) {
                 setLimit(limit+3);
                 console.log('добавим элементов');
@@ -46,7 +49,6 @@ const Products = () => {
             }
         }
     };
-
 
     return (
     <div>
@@ -64,19 +66,19 @@ const Products = () => {
             ></Input>
 
 
-            <Filter options={[
-                { key: 'msk', value: 'Москва' },
-                { key: 'spb', value: 'Санкт-Петербург' },
-                { key: 'ekb', value: 'Екатеринбург' }
-            ]}
-                           value={[{ key: 'msk', value: 'Москва' }]}
+            <Filter options={categories}
+                           value={filter}
                            disabled={false}
-                           onChange={([{ key, value }]: Option[]) => console.log('Выбрано:', key, value)}
+                           onChange={(values: Option[]) => {
+                               console.log('Выбрано:', values);
+                               setFilter(values);
+                            }
+                            }
                            pluralizeOptions={(value) => {return value.toString()}}
             />
         </div>
         <Total filter={[]}/>
-        <ProductList filter={[]} limit={limit}></ProductList>
+        <ProductList filter={filter} limit={limit}></ProductList>
         <nav></nav>
     </div>
     );

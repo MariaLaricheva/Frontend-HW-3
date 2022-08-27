@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from "axios";
+import {Option} from "../Filter/Filter";
 import Product from "../../../@custom-types/product";
 import {Link} from "react-router-dom";
 import Card from "../Card";
@@ -11,7 +12,7 @@ import {useNavigate} from "react-router-dom";
 /** Пропсы, который принимает компонент Button */
 export type ProductListProps = React.PropsWithChildren<{
     /** Категории товаров, которые нужно вывести*/
-    filter: Array<string>;
+    filter: Array<Option>;
     /** Ограничение на количество товаров*/
     limit?: number;
 }>;
@@ -21,7 +22,7 @@ const ProductList: React.FC<ProductListProps> = ({filter, limit}) => {
 
     const [products, setProducts] = useState<Product[]>([]);
 
-    useEffect(() => { getData() },[limit])
+    useEffect(() => { getData() },[limit, filter])
 
     const fetch = async (address: string) => {
         const result = await axios({
@@ -30,7 +31,7 @@ const ProductList: React.FC<ProductListProps> = ({filter, limit}) => {
         });
 
         //с методом set можно будет убрать дубликаты
-        // setProducts([...new Set(  всё что ниже закомментированно   )])
+        // setProducts([...new Set(   всё что ниже закомментированно   )])
 /*
         setProducts(products.concat(result.data.map((raw: Product) =>
             ({
@@ -57,8 +58,8 @@ const ProductList: React.FC<ProductListProps> = ({filter, limit}) => {
 
     const getData = () => {
         if (filter.length !== 0){
-            filter.map((category: string) => {
-                fetch('https://fakestoreapi.com/products/category/'+category+'?limit='+limit);
+            filter.map((category: Option) => {
+                fetch('https://fakestoreapi.com/products/category/'+category.value+'?limit='+limit);
             })
         }
         else {
@@ -69,8 +70,8 @@ const ProductList: React.FC<ProductListProps> = ({filter, limit}) => {
 
     const getProductCount = () => {
         if (filter.length !== 0){
-            filter.map((category: string) => {
-                fetch('https://fakestoreapi.com/products/category/'+category);
+            filter.map((category: Option) => {
+                fetch('https://fakestoreapi.com/products/category/'+category.value);
             })
         }
         else {
