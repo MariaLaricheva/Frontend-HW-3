@@ -1,5 +1,5 @@
 import "./Products.scss";
-import { Link } from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import Product from "../../../@custom-types/product";
@@ -9,8 +9,43 @@ import Filter from "../../components/Filter";
 import Input from "../../components/Input";
 import {Option} from "../../components/MultiDropdown/MultiDropdown";
 import Loupe from "../../../static/search-normal.svg";
+import Total from "../../components/Total";
 
 const Products = () => {
+
+    const [categories, setCategories] = useState<Array<Option>>([])
+    const [limit, setLimit] = useState<number>(6)
+    const { id } = useParams();
+
+    useEffect(() => {fetch()},[]);
+
+    const fetch = async () => {
+        const result = await axios({
+            method: 'get',
+            url: 'https://fakestoreapi.com/products/categories'
+        });
+        console.log('result', result);
+        setCategories(result.data.map((raw: string, index: number) =>
+            ({
+                id: index,
+                title: raw.toString(),
+            })));
+        console.log('categories', categories);
+    };
+
+    window.onscroll = function(ev) {
+        if ((window.innerHeight + window.scrollY + 50) >= document.body.offsetHeight) {
+            console.log('МЫ ВНИЗУ');
+
+            if (limit < 20) {
+                setLimit(limit+3);
+                console.log('добавим элементов');
+            }
+            else {
+                console.log('нет больше элементов!!!');
+            }
+        }
+    };
 
 
     return (
@@ -40,8 +75,8 @@ const Products = () => {
                            pluralizeOptions={(value) => {return value.toString()}}
             />
         </div>
-        <h2>Total product</h2>
-        <ProductList filter={[]}></ProductList>
+        <Total filter={[]}/>
+        <ProductList filter={[]} limit={limit}></ProductList>
         <nav></nav>
     </div>
     );

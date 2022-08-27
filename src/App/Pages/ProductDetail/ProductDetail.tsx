@@ -13,6 +13,8 @@ const ProductDetail = () => {
     const [product, setProduct] = useState<Product>()
     const { id } = useParams();
 
+    useEffect(() => {fetch()}, [id]);
+
     const fetch = async () => {
         const result = await axios({
             method: 'get',
@@ -29,8 +31,6 @@ const ProductDetail = () => {
             rating: result.data.rating
         });
     };
-
-    useEffect(() => {fetch()}, []);
 
     //заглушка чтобы не ругалось
     function getProduct(){
@@ -55,8 +55,6 @@ const ProductDetail = () => {
         }
         else {return ("пппжжждите")}
     }
-
-
 
     const getCategory = () => {
         if (typeof product !== 'undefined'){

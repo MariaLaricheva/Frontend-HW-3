@@ -19,17 +19,10 @@ const Card: React.FC<CardProps> =  ({image, title,
                                                subtitle,
                                                content,
                                                onClick}) => {
-    /*
-    const [picture, setPicture] = useState<string>(image);
-
-    useEffect(() => {setPicture(image)}, [image])
-    */
-    console.log(image);
-
 
     return(
         <div onClick={onClick} className={'card'}>
-            <img src={image} alt={"фото товара"} className={'card-image'}/>
+            <img src={image} alt={"фото товара"} className={'card-img'}/>
             <h1 className={'card-title'}>{title}</h1>
             <h2 className={'card-subtitle'}>{subtitle}</h2>
             {content}

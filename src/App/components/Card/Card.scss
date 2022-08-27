@@ -1,17 +1,24 @@
 .card {
     width: 360px;
-    height: 394px;
     font-family: 'Eudoxus Sans', sans-serif;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.card:hover{
+    background-color: #d9e1e8;
 }
 
 .card-img {
     width: 360px;
     height: 360px;
+    object-fit: contain;
+    object-position: center;
 }
 
 .card-category {
-    position: relative;
     font-weight: 700;
     font-size: 18px;
     line-height: 130%;
@@ -22,14 +29,12 @@
     font-weight: 700;
     font-size: 26px;
     color: black;
-    position: relative;
 }
 
 .card-subtitle {
     font-weight: 500;
     font-size: 18px;
     color: #AFADB5;
-    position: relative;
 }
 
 .card-price {
