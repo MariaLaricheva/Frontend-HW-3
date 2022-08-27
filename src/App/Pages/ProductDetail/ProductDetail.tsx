@@ -13,27 +13,24 @@ const ProductDetail = () => {
     const [product, setProduct] = useState<Product>()
     const { id } = useParams();
 
-    useEffect(() => {
-        const fetch = async () => {
-            const result = await axios({
-                method: 'get',
-                url: 'https://fakestoreapi.com/products/'+id
-            });
-            console.log('result', result);
-            setProduct({
-                id: result.data.id,
-                title: result.data.title,
-                category: result.data.category,
-                description: result.data.description,
-                image: result.data.image,
-                price: result.data.price,
-                rating: result.data.rating
-            });
-        };
-        fetch();
-    },        [])          // при пустом массиве коллбек вызывается
-                                // только при появлении компонента в dom-дереве
+    const fetch = async () => {
+        const result = await axios({
+            method: 'get',
+            url: 'https://fakestoreapi.com/products/'+id
+        });
+        console.log('result', result);
+        setProduct({
+            id: result.data.id,
+            title: result.data.title,
+            category: result.data.category,
+            description: result.data.description,
+            image: result.data.image,
+            price: result.data.price,
+            rating: result.data.rating
+        });
+    };
 
+    useEffect(() => {fetch()}, []);
 
     //заглушка чтобы не ругалось
     function getProduct(){
@@ -56,8 +53,10 @@ const ProductDetail = () => {
 
             );
         }
-        else {return ("нет такого :)")}
+        else {return ("пппжжждите")}
     }
+
+
 
     const getCategory = () => {
         if (typeof product !== 'undefined'){
@@ -71,7 +70,8 @@ const ProductDetail = () => {
         <div>
             {getProduct()}
             <h3 className={'product-other'}>Related items</h3>
-            <ProductList filter={[getCategory()]}></ProductList>
+            {product &&
+            <ProductList filter={[getCategory()]} limit={3}></ProductList>}
         </div>
     );
 };

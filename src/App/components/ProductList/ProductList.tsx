@@ -3,6 +3,7 @@ import axios from "axios";
 import Product from "../../../@custom-types/product";
 import {Link} from "react-router-dom";
 import Card from "../Card";
+import product from "../../../@custom-types/product";
 
 
 /** Пропсы, который принимает компонент Button */
@@ -18,6 +19,8 @@ const ProductList: React.FC<ProductListProps> = ({filter, limit}) => {
 
     const [products, setProducts] = useState<Product[]>([]);
 
+    useEffect(() => { getData() },[])
+
     const fetch = async (address: string) => {
         const result = await axios({
             method: 'get',
@@ -29,28 +32,30 @@ const ProductList: React.FC<ProductListProps> = ({filter, limit}) => {
                 title: raw.title
             }))));
     };
-
     const getData = () => {
         if (filter.length !== 0){
             filter.map((category: string) => {
-                fetch('https://fakestoreapi.com/products/category/'+category);
+                fetch('https://fakestoreapi.com/products/category/'+category+'?limit='+limit);
             })
         }
         else {
-            fetch('https://fakestoreapi.com/products');
+            fetch('https://fakestoreapi.com/products?limit='+limit);
         }
+        console.log(products);
     }
-
-    useEffect(getData,[])
 
     return (
             <div className={'product-list'}>
-                {products.map(product => (
+                {products?.map(product => (
                     <li key={product.id}>
                         <Link to={`/product/${product.id}`}>
                             {product.title}
                         </Link>
-                        <Card image={product.image} title={product.title} subtitle={product.category}/>
+                        {product &&
+                        <Card image={product.image}
+                              title={product.title}
+                              subtitle={product.category}
+                        /> }
                     </li>))}
             </div>
     );

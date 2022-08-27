@@ -13,7 +13,7 @@ export type InputProps =  {
     /** адрес иконки, если есть*/
     img?: string;
     /** кнопка с действием, если есть*/
-    button?: React.FC<ButtonProps>;
+    button?: React.ReactNode;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 

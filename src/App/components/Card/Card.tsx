@@ -1,6 +1,6 @@
 /** Пропсы, которые принимает компонент Card */
 import "./Card.scss"
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 type CardProps = {
     /** URL изображения */
@@ -19,6 +19,14 @@ const Card: React.FC<CardProps> =  ({image, title,
                                                subtitle,
                                                content,
                                                onClick}) => {
+    /*
+    const [picture, setPicture] = useState<string>(image);
+
+    useEffect(() => {setPicture(image)}, [image])
+    */
+    console.log(image);
+
+
     return(
         <div onClick={onClick} className={'card'}>
             <img src={image} alt={"фото товара"} className={'card-image'}/>
