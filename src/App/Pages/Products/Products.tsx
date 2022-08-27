@@ -1,15 +1,13 @@
 import "./Products.scss";
-import {Link, useParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import axios from "axios";
-import Product from "../../../@custom-types/product";
-import ProductList from "../../components/ProductList/ProductList";
-import Button, {ButtonProps} from "../../components/Button/Button";
-import Filter from "../../components/Filter";
-import Input from "../../components/Input";
-import {Option} from "../../components/MultiDropdown/MultiDropdown";
-import Loupe from "../../../static/search-normal.svg";
-import Total from "../../components/Total";
+import ProductList from "@components/ProductList/ProductList";
+import Button from "@components/Button/Button";
+import Filter from "@components/Filter";
+import Input from "@components/Input";
+import {Option} from "@components/MultiDropdown/MultiDropdown";
+import Loupe from "@static/search-normal.svg";
+import Total from "@components/Total";
 
 const Products = () => {
 

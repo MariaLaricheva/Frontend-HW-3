@@ -2,9 +2,7 @@ import {useEffect, useState} from 'react';
 import axios from "axios";
 import {Option} from "../Filter/Filter";
 import Product from "../../../@custom-types/product";
-import {Link} from "react-router-dom";
 import Card from "../Card";
-import product from "../../../@custom-types/product";
 import "./ProductList.scss"
 import {useNavigate} from "react-router-dom";
 

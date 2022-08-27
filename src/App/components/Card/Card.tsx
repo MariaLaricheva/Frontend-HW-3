@@ -1,6 +1,6 @@
 /** Пропсы, которые принимает компонент Card */
 import "./Card.scss"
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 type CardProps = {
     /** URL изображения */
