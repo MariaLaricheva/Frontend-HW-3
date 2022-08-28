@@ -1,5 +1,5 @@
-.product-heading {
-  font-family: 'Eudoxus Sans', SansSerif;
+.product__heading {
+  font-family: 'Eudoxus Sans', SansSerif, serif;
   font-style: normal;
   font-weight: 700;
   font-size: 64px;
@@ -10,7 +10,7 @@
   margin-bottom: 20px;
 }
 
-.product-paragraph {
+.product__paragraph {
   width: 600px;
   margin: auto;
   font-style: normal;
@@ -23,7 +23,7 @@
   margin-bottom: 80px;
 }
 
-.product-search{
+.product__search{
   margin-left: auto;
   margin-right: auto;
   display: flex;

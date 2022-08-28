@@ -1,12 +1,11 @@
 {
   "extends": [
     "react-app",
-    "plugin:prettier/recommended"
+    "prettier"
   ],
   "plugins": ["prettier"],
   "rules": {
     "no-console": "error",
-    "prettier/prettier": "error",
     "import/order": [
       "error",
       {

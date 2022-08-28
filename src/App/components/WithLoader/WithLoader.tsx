@@ -1,25 +1,26 @@
-import Loader from "../Loader/Loader";
-import "./WithLoader.scss"
 import React from "react";
 
+import Loader from "../Loader/Loader";
+import "./WithLoader.scss";
 
 export type WithLoaderProps = React.PropsWithChildren<{
-    loading: boolean;
+  loading: boolean;
 }>;
 
-export const WithLoader: React.FC<WithLoaderProps> = ({loading, children}) => {
-
-    return(
-            <div className="WithLoader">
-                {children}
-                {loading && <Loader loading={loading} className="content"/> }
-            </div>
-    )
+export const WithLoader: React.FC<WithLoaderProps> = ({
+  loading,
+  children,
+}) => {
+  return (
+    <div className="WithLoader">
+      {children}
+      {loading && <Loader loading={loading} className="content" />}
+    </div>
+  );
 };
 
-
 WithLoader.defaultProps = {
-    loading: true
-}
+  loading: true,
+};
 
 export default WithLoader;
