@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 
 import classNames from "classnames";
-import "./CheckBox.scss";
+
+import styles from "./CheckBox.module.scss";
 
 type CheckBoxProps = {
   /** Вызывается при клике на чекбокс */
@@ -23,7 +24,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({ onChange, ...props }) => {
     <input
       type="checkbox"
       className={classNames(
-        "checkbox-custom",
+        "checkbox_custom",
         { disabled: props.disabled },
         { checked: checked }
       )}

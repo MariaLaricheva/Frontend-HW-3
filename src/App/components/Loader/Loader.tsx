@@ -1,7 +1,8 @@
-import "./Loader.scss";
 import React from "react";
 
 import classNames from "classnames";
+
+import styles from "./Loader.module.scss";
 
 /** Возможные значения размера лоадера */
 export enum LoaderSize {
@@ -30,11 +31,11 @@ type LoaderProps = {
 };
 
 const Loader: React.FC<LoaderProps> = ({ loading, size, className }) => {
-  //   'loader_size-${size}' не работает
+  //   'loader_size-${size}' не работает потому что нужны были ` вместо '
   if (loading) {
     return (
       <div
-        className={classNames(className, "loader", "loader_size-" + size)}
+        className={classNames(className, [styles.loader], [styles.loader_size+{size}])}
       ></div>
     );
   } else {

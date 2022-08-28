@@ -1,7 +1,7 @@
 import React from "react";
 
 import Loader from "../Loader/Loader";
-import "./WithLoader.scss";
+import styles from "./WithLoader.module.scss";
 
 export type WithLoaderProps = React.PropsWithChildren<{
   loading: boolean;
@@ -12,9 +12,9 @@ export const WithLoader: React.FC<WithLoaderProps> = ({
   children,
 }) => {
   return (
-    <div className="WithLoader">
+    <div className={`${styles.withLoader}`}>
       {children}
-      {loading && <Loader loading={loading} className="content" />}
+      {loading && <Loader loading={loading} className={`${styles.content}`} />}
     </div>
   );
 };

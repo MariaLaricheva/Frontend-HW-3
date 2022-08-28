@@ -2,9 +2,9 @@ import React from "react";
 
 import classNames from "classnames";
 
-import "./Button.scss";
 import Loader from "../Loader/Loader";
 import { LoaderSize } from "../Loader/Loader";
+import styles from "./Button.module.scss";
 
 /** Возможные раскраски кнопки */
 export enum ButtonColor {
@@ -39,10 +39,10 @@ const Button: React.FC<ButtonProps> = ({
     <button
       disabled={loading}
       className={classNames(
-        "button-custom",
+        [styles.button_custom],
         { button_disabled: props.disabled || loading },
-        { "button_color-primary": color === ButtonColor.primary },
-        { "button_color-secondary": color === ButtonColor.secondary },
+        { [styles.button_color__primary]: color === ButtonColor.primary },
+        { [styles.button_color__secondary]: color === ButtonColor.secondary },
         className
       )}
       {...props}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
-import "./Total.scss";
+
+import styles from "./Total.module.scss";
 
 type TotalProps = {
   /** фильтр */
@@ -33,9 +34,9 @@ const Total: React.FC<TotalProps> = ({ filter }) => {
   };
 
   return (
-    <div className={"total-wrapper"}>
-      <h2 className={"total-heading"}>Total product</h2>
-      <div className={"total-value"}>{total}</div>
+    <div className={`${styles.total_wrapper}`}>
+      <h2 className={`${styles.total_heading}`}>Total product</h2>
+      <div className={`${styles.total_value}`}>{total}</div>
     </div>
   );
 };

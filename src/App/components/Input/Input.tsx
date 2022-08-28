@@ -1,10 +1,9 @@
 /** Пропсы, которые принимает компонент Input */
-import React, { ChangeEventHandler, useState } from "react";
+import React from "react";
 
 import classNames from "classnames";
 
-import "./Input.scss";
-import Button, { ButtonProps } from "../Button/Button";
+import styles from "./Input.module.scss";
 
 export type InputProps = {
   /** Значение поля */
@@ -27,13 +26,14 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   return (
-    <div className={classNames("search-bar")}>
-      {img && <img src={img} alt={"иконка"} className={"search-bar-img"} />}
+    <div className={classNames([styles.searchbar])}>
+      {img && <img src={img} alt={"иконка"} className={`${styles.searchbar_img}`} />}
       <input
         type="text"
         className={classNames(
-          "input-custom",
-          { input_disabled: props.disabled },
+          [styles.input_custom],
+          { [styles.input_disabled]: props.disabled },
+          [styles.searchbar_input],
           className
         )}
         value={value}
@@ -41,7 +41,7 @@ export const Input: React.FC<InputProps> = ({
         {...props}
       />
       {button && (
-        <div className={classNames("search-bar-btn-wrapper")}>{button}</div>
+        <div className={classNames([styles.searchbar_btn_wrapper])}>{button}</div>
       )}
     </div>
   );

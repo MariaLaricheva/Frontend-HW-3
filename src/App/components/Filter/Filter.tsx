@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
+import filter_icon from "@static/filter.svg";
 import classNames from "classnames";
 
-import "./Filter.scss";
-import filter_icon from "../../../static/filter.svg";
+import styles from "./Filter.module.scss";
 
 /** Вариант для выбора в фильтре */
 export type Option = {
@@ -71,23 +71,25 @@ const Filter: React.FC<MultiDropdownProps> = ({
   }
 
   return (
-    <div className={"filter"}>
+    <div className={`${styles.filter}`}>
       <button
         disabled={disabled}
         onClick={toggleDropdown}
-        className={classNames("filter-header")}
+        className={classNames(`${styles.filter_header}`)}
       >
         <img src={filter_icon} alt={"Y"}></img>
         Filter
       </button>
-      <div className={"filter-options"}>
+      <div className={`${styles.filter_options}`}>
         {showOptions &&
           options.map((option) => (
             <button
               key={option.key}
-              className={classNames("filter-element", {
-                "filter-element__selected": isSelected(option),
-              })}
+              className={classNames(`${styles.filter_element}`,
+              {
+                [styles.filter_element__selected] : isSelected(option),
+              }
+                )}
               onClick={() => {
                 changeValueArray(option);
               }}

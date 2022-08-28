@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import classNames from "classnames";
-import "./MultiDropdown.scss";
+
+import styles from "./MultiDropdown.module.scss";
 
 /** Вариант для выбора в фильтре */
 export type Option = {
@@ -73,7 +74,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
       <button
         disabled={disabled}
         onClick={toggleDropdown}
-        className={classNames("multidropdown__header")}
+        className={`${styles.multidropdown__header}`}
       >
         {pluralizeOptions(value)}
       </button>
@@ -83,8 +84,8 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
           <button
             key={option.key}
             style={{ width: "400px" }}
-            className={classNames("multidropdown__element", {
-              multidropdown__element_selected: isSelected(option),
+            className={classNames([styles.multidropdown__element], {
+              [styles.multidropdown__element_selected]: isSelected(option),
             })}
             onClick={() => {
               changeValueArray(option);

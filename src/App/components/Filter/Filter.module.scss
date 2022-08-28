@@ -2,7 +2,7 @@
     width: 190px;
 }
 
-.filter-header {
+.filter_header {
     height: 84px;
     background-color: #ffffff;
     border-radius: 0;
@@ -28,15 +28,15 @@
     align-items: center;     /*Центрирование по вертикали */
 }
 
-.filter-header:focus {
+.filter_header:focus {
     border: 1px solid #518581;
 }
 
-.filter-header:disabled {
+.filter_header:disabled {
     opacity: 0.7;
 }
 
-.filter-options{
+.filter_options{
     z-index: 10;
     margin-top: 12px;
     position: absolute;
@@ -44,7 +44,7 @@
 }
 
 
-.filter-element{
+.filter_element{
     position: relative;
     width: 190px;
     font-family: 'Roboto', serif;
@@ -58,6 +58,6 @@
     text-align: center;
 }
 
-.filter-element__selected{
+.filter_element__selected{
     color: #518581;
 }

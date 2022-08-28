@@ -1,4 +1,4 @@
-.input-custom {
+.input_custom {
     /* opacity: 0.7; */
     /* control-drop-shadow */
     height: 86px;
@@ -8,17 +8,17 @@
     padding: 0px 26px;
 }
 
-.input-custom:focus {
+.input_custom:focus {
     border: transparent;
     outline: transparent;
 }
 
-.input-custom:disabled {
+.input_custom:disabled {
     opacity: 0.7;
 }
 
 
-.search-bar{
+.searchbar{
     margin-left: 10px;
     width: 1020px;
     height: 80px;
@@ -30,22 +30,22 @@
     rgba(175, 173, 181, 0.15);
 }
 
-.search-bar:focus-within{
+.searchbar:focus-within{
     border: transparent;
     outline: 1px solid #518581;
 }
 
-.search-bar-img{
+.searchbar_img{
     width: 24px;
     padding: 30px 12px 30px 25px;
     background-color: white;
 }
 
-.search-bar-input{
+.searchbar_input{
     width: 720px;
 }
 
-.search-bar-btn-wrapper{
+.searchbar_btn_wrapper{
     padding: 13.3px 26px;
     background-color: white;
 }

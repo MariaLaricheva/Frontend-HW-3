@@ -1,4 +1,4 @@
-.product-display{
+.product__display{
   margin: auto;
   width: 800px;
   display: flex;
@@ -10,11 +10,11 @@
   gap: 60px;
 }
 
-.product-image{
+.product__image{
   width: 600px;
 }
 
-.product-name{
+.product__name{
   /* Headings/H2 - Bold 44 */
   text-align: left;
   font-style: normal;
@@ -28,7 +28,7 @@
 
 }
 
-.product-category{
+.product__category{
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -40,7 +40,7 @@
 
 }
 
-.product-description{
+.product__description{
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -51,7 +51,7 @@
   color: #AFADB5;
 }
 
-.product-price{
+.product__price{
   font-style: normal;
   font-weight: 700;
   font-size: 44px;
@@ -62,17 +62,17 @@
   color: #151411;
 }
 
-.product-actions{
+.product__actions{
   display: flex;
   justify-content: space-between; /*Центрирование по горизонтали*/
   gap: 20px;
 }
 
-.product-actions-btn{
+.product__actions__btn{
   width: 285px;
 }
 
-.product-other{
+.product__other{
   font-family: 'Eudoxus Sans', SansSerif, serif;
   font-style: normal;
   font-weight: 700;

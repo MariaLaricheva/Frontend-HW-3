@@ -11,33 +11,33 @@
     opacity: 80%;
 }
 
-.card-img {
+.card__img {
     width: 360px;
     height: 360px;
     object-fit: contain;
     object-position: center;
 }
 
-.card-category {
+.card__category {
     font-weight: 700;
     font-size: 18px;
     line-height: 130%;
     color: #AFADB5;
 }
 
-.card-title {
+.card__title {
     font-weight: 700;
     font-size: 26px;
     color: black;
 }
 
-.card-subtitle {
+.card__subtitle {
     font-weight: 500;
     font-size: 18px;
     color: #AFADB5;
 }
 
-.card-price {
+.card__price {
     font-weight: 700;
     font-size: 24px;
     color: black;

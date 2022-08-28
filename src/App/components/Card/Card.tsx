@@ -1,6 +1,7 @@
 /** Пропсы, которые принимает компонент Card */
-import "./Card.scss";
 import React from "react";
+
+import styles from "./Card.module.scss";
 
 type CardProps = {
   /** URL изображения */
@@ -23,21 +24,19 @@ const Card: React.FC<CardProps> = ({
   onClick,
 }) => {
   return (
-    <div onClick={onClick} className={"card"}>
-      <img src={image} alt={"фото товара"} className={"card-img"} />
-      <h1 className={"card-title"}>{title}</h1>
-      <h2 className={"card-subtitle"}>{subtitle}</h2>
+    <div onClick={onClick} className={`${styles.card}`}>
+      <img src={image} alt={"фото товара"} className={`${styles.card__img}`} />
+      <h1 className={`${styles.card__title}`}>{title}</h1>
+      <h2 className={`${styles.card__subtitle}`}>{subtitle}</h2>
       {content}
     </div>
   );
 };
 
 Card.defaultProps = {
-  /** Содержимое карточки (футер/боковая часть), может быть пустым
-    content: ;
-
-     Клик на карточку
-     onClick: ;
+    /**
+     * вероятно не пригодится
+     *
      */
 };
 

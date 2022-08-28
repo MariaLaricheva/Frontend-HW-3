@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Product from "../../../@custom-types/product";
 import Card from "../Card";
 import { Option } from "../Filter/Filter";
-
-import "./ProductList.scss";
+import styles from "./ProductList.module.scss";
 
 
 /** Пропсы, который принимает компонент Button */
@@ -32,10 +31,7 @@ const ProductList: React.FC<ProductListProps> = ({ filter, limit }) => {
       url: address,
     });
 
-    //с методом set можно будет убрать дубликаты
-    // setProducts([...new Set(   всё что ниже закомментированно   )])
-
-    /*
+    /* //через конкат
                 setProducts(products.concat(result.data.map((raw: Product) =>
                     ({
                         id: raw.id,
@@ -87,7 +83,7 @@ const ProductList: React.FC<ProductListProps> = ({ filter, limit }) => {
   let navigate = useNavigate();
 
   return (
-    <div className={"product-list"}>
+    <div className={`${styles.product_list}`}>
       {products?.map(
         (product) =>
           product && (
