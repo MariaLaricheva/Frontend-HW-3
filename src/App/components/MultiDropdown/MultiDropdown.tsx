@@ -5,25 +5,24 @@ import classNames from "classnames";
 import styles from "./MultiDropdown.module.scss";
 
 /** Вариант для выбора в фильтре */
-export type Option = {
+export type optionType = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
   key: string;
   /** Значение варианта, отображается пользователю */
   value: string;
 };
 
-/** Пропсы, которые принимает компонент Dropdown */
 export type MultiDropdownProps = {
   /** Массив возможных вариантов для выбора */
-  options: Option[];
+  options: optionType[];
   /** Текущие выбранные значения поля, массив может быть пустым */
-  value: Option[];
+  value: optionType[];
   /** Callback, вызываемый при выборе варианта */
-  onChange: ([{ key, value }]: Option[]) => void;
+  onChange: (options: optionType[]) => void;
   /** Заблокирован ли дропдаун */
   disabled?: boolean;
   /** Преобразовать выбранные значения в строку. Отображается в дропдауне в качестве выбранного значения */
-  pluralizeOptions: (value: Option[]) => string;
+  pluralizeOptions: (value: optionType[]) => string;
 };
 
 export const MultiDropdown: React.FC<MultiDropdownProps> = ({
@@ -45,9 +44,9 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
     }
   }
 
-  const isSelected = (option: Option) => {
+  const isSelected = (option: optionType) => {
     let result = false;
-    value.forEach((el: Option) => {
+    value.forEach((el: optionType) => {
       if (option.key === el.key) {
         result = true;
       }
@@ -55,13 +54,13 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
     return result;
   };
 
-  function changeValueArray(option: Option): void {
+  function changeValueArray(option: optionType): void {
     //возвращаем изменившийся список наверх, не меняя его самого
-    let newValue: Option[] = [];
+    let newValue: optionType[] = [];
 
-    if (value.some((element: Option) => element.key === option.key)) {
+    if (value.some((element: optionType) => element.key === option.key)) {
       //отфильтровать из value элемент option и положить в newValue
-      newValue = value.filter((element: Option) => element.key !== option.key);
+      newValue = value.filter((element: optionType) => element.key !== option.key);
     } else {
       //newValue.concat(value, [option]);
       newValue = [...value, option];
@@ -74,7 +73,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
       <button
         disabled={disabled}
         onClick={toggleDropdown}
-        className={`${styles.multidropdown__header}`}
+        className={styles.multidropdown__header}
       >
         {pluralizeOptions(value)}
       </button>

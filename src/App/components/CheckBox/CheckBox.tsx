@@ -31,7 +31,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({ onChange, ...props }) => {
       onClick={toggleCheck}
       checked={checked}
       {...props}
-    ></input>
+    />
   );
 };
 

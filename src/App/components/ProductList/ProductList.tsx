@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 
+import Card from "@components/Card";
+import { Option } from "@components/Filter/Filter";
+import styles from "@components/ProductList/ProductList.module.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import Product from "../../../@custom-types/product";
-import Card from "../Card";
-import { Option } from "../Filter/Filter";
-import styles from "./ProductList.module.scss";
-
+import ProductType from "../../../customTypes/productType";
 
 /** Пропсы, который принимает компонент Button */
 export type ProductListProps = React.PropsWithChildren<{
@@ -19,7 +18,7 @@ export type ProductListProps = React.PropsWithChildren<{
 
 //возвращает массив карточек, отфильтрованных по выбранным категориям, с заданным лимитом
 const ProductList: React.FC<ProductListProps> = ({ filter, limit }) => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
     getData();
@@ -31,21 +30,9 @@ const ProductList: React.FC<ProductListProps> = ({ filter, limit }) => {
       url: address,
     });
 
-    /* //через конкат
-                setProducts(products.concat(result.data.map((raw: Product) =>
-                    ({
-                        id: raw.id,
-                        title: raw.title,
-                        category: raw.category,
-                        description: raw.description,
-                        image: raw.image,
-                        price: raw.price,
-                        rating: raw.rating
-                  }))));
-
-        */
     setProducts(
-      result.data.map((raw: Product) => ({
+      //добавить проверку на то, есть ли в резалт какое-то значение
+      result.data.map((raw: ProductType) => ({
         id: raw.id,
         title: raw.title,
         category: raw.category,
@@ -69,21 +56,10 @@ const ProductList: React.FC<ProductListProps> = ({ filter, limit }) => {
     }
   };
 
-  const getProductCount = () => {
-    if (filter.length !== 0) {
-      filter.map((category: Option) => {
-        fetch("https://fakestoreapi.com/products/category/" + category.value);
-      });
-    } else {
-      fetch("https://fakestoreapi.com/products");
-    }
-    return;
-  };
-
   let navigate = useNavigate();
 
   return (
-    <div className={`${styles.product_list}`}>
+    <div className={styles.product_list}>
       {products?.map(
         (product) =>
           product && (

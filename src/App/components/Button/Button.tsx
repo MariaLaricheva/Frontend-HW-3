@@ -1,9 +1,9 @@
 import React from "react";
 
+import Loader from "@components/Loader/Loader";
+import { LoaderSize } from "@components/Loader/Loader";
 import classNames from "classnames";
 
-import Loader from "../Loader/Loader";
-import { LoaderSize } from "../Loader/Loader";
 import styles from "./Button.module.scss";
 
 /** Возможные раскраски кнопки */
@@ -17,7 +17,7 @@ export enum ButtonColor {
 /** Пропсы, который принимает компонент Button */
 export type ButtonProps = React.PropsWithChildren<{
   /**
-   * Если true, то внутри кнопки вместе с children отображается компонент Loader_old
+   * Если true, то внутри кнопки вместе с children отображается компонент Loader
    * Также кнопка должна переходить в состояние disabled
    * По умолчанию - false
    */
@@ -25,11 +25,10 @@ export type ButtonProps = React.PropsWithChildren<{
   /** Цвет кнопки, по умолчанию -  ButtonColor.primary*/
   color?: ButtonColor;
   className?: string;
-}> &
-  React.ButtonHTMLAttributes<HTMLButtonElement>;
+}> & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button: React.FC<ButtonProps> = ({
-  loading = false,
+  loading ,
   color,
   children,
   className,
@@ -37,17 +36,15 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      disabled={loading}
+      disabled={loading || props.disabled}
       className={classNames(
-        [styles.button_custom],
-        { button_disabled: props.disabled || loading },
-        { [styles.button_color__primary]: color === ButtonColor.primary },
-        { [styles.button_color__secondary]: color === ButtonColor.secondary },
+        styles.button_custom,
+        styles[`button_color__${color}`],
         className
       )}
       {...props}
     >
-      {loading && <Loader loading={loading} size={LoaderSize.s} />}
+      {loading && <Loader size={LoaderSize.s} />}
       {children}
     </button>
   );

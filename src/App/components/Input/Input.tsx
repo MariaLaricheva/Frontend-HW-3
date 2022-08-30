@@ -1,4 +1,3 @@
-/** Пропсы, которые принимает компонент Input */
 import React from "react";
 
 import classNames from "classnames";
@@ -10,12 +9,17 @@ export type InputProps = {
   value: string;
   /** Callback, вызываемый при вводе данных в поле */
   onChange: (value: string) => void;
+  // лучше вставить в зачение event,
+  // а потом из event.target.value будет доставаться значение чекбокса
   className?: string;
   /** адрес иконки, если есть*/
   img?: string;
   /** кнопка с действием, если есть*/
   button?: React.ReactNode;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">;
+// без Omit onChange имеет смешанный тип, что вызывает конфликты
+// поэтому используем Omit, и он уберет из типа React.InputHTMLAttributes элемент onChange
+
 
 export const Input: React.FC<InputProps> = ({
   value,
@@ -26,8 +30,8 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   return (
-    <div className={classNames([styles.searchbar])}>
-      {img && <img src={img} alt={"иконка"} className={`${styles.searchbar_img}`} />}
+    <div className={styles.searchbar}>
+      {img && <img src={img} alt={"иконка"} className={styles.searchbar_img} />}
       <input
         type="text"
         className={classNames(
@@ -41,7 +45,7 @@ export const Input: React.FC<InputProps> = ({
         {...props}
       />
       {button && (
-        <div className={classNames([styles.searchbar_btn_wrapper])}>{button}</div>
+        <div className={styles.searchbar_btn_wrapper}>{button}</div>
       )}
     </div>
   );

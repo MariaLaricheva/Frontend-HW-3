@@ -13,8 +13,7 @@ export type Option = {
   value: string;
 };
 
-/** Пропсы, которые принимает компонент Dropdown */
-export type MultiDropdownProps = {
+export type FilterProps = {
   /** Массив возможных вариантов для выбора */
   options: Option[];
   /** Текущие выбранные значения поля, массив может быть пустым */
@@ -27,7 +26,7 @@ export type MultiDropdownProps = {
   pluralizeOptions: (value: Option[]) => string;
 };
 
-const Filter: React.FC<MultiDropdownProps> = ({
+const Filter: React.FC<FilterProps> = ({
   options,
   value,
   onChange,
@@ -71,21 +70,21 @@ const Filter: React.FC<MultiDropdownProps> = ({
   }
 
   return (
-    <div className={`${styles.filter}`}>
+    <div className={styles.filter}>
       <button
         disabled={disabled}
         onClick={toggleDropdown}
-        className={classNames(`${styles.filter_header}`)}
+        className={classNames(styles.filter_header)}
       >
-        <img src={filter_icon} alt={"Y"}></img>
+        <img src={filter_icon} alt="filter"></img>
         Filter
       </button>
-      <div className={`${styles.filter_options}`}>
+      <div className={styles.filter_options}>
         {showOptions &&
           options.map((option) => (
             <button
               key={option.key}
-              className={classNames(`${styles.filter_element}`,
+              className={classNames(styles.filter_element,
               {
                 [styles.filter_element__selected] : isSelected(option),
               }

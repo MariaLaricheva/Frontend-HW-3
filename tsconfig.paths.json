@@ -6,7 +6,9 @@
       "@config/*": ["src/config/*"],
       "@styles/*": ["src/styles/*"],
       "@utils/*": ["src/utils/*"],
-      "@static/*": ["src/static/*"]
+      "@static/*": ["src/static/*"],
+      "@custom-types/*": ["src/custom-types"],
+      "@pages/*": ["src/App/Pages"]
     }
   }
 }

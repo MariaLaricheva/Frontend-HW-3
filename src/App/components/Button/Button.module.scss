@@ -1,17 +1,17 @@
+@import "@styles/colors";
+
 .button_custom {
-    display: inline-block;
+    display: inline-block; //flex?
     font-size: 18px;
     font-weight: 700;
     font-family: 'Eudoxus Sans', serif;
     line-height: 130%;
     /* or 23px */
     font-style: normal;
-    vertical-align: middle;
-    /* непонятно чем отличаются строчка выше и строчка ниже )0)) */
     text-align: center;
 
-    padding: 15px 28px;     /* отделяет текст от границ кнопки */
-    gap: 100px;             /* отделяет лоадер от текста по идее, по факту ничего не делает((9 */
+    padding: 15px 28px;
+    gap: 100px;     /* отделял бы лоадер от текста по идее, если поменять дисплей на флексбокс */
     border-color: transparent;
 }
 
