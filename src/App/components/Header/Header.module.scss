@@ -5,30 +5,28 @@
   justify-content: space-around; /*Центрирование по горизонтали*/
   /*можно попробовать space-evenly или space-between*/
   align-items: center;     /*Центрирование по вертикали */
+  margin-bottom: 100px;
 }
 
-.header-left{
+.header_left{
   display: flex;
   justify-content: center; /*Центрирование по горизонтали*/
   align-items: center;     /*Центрирование по вертикали */
 }
 
 
-.header-img{
+.header_img{
   margin: 10px;
 }
 
-.header-middle{
 
-}
-
-.header-right{
+.header_right{
   vertical-align: middle
 }
 
-.header-link{
+.header_link{
   vertical-align: middle;
-  font-family: 'Eudoxus Sans', SansSerif;
+  font-family: 'Eudoxus Sans', SansSerif, serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -40,7 +38,7 @@
   text-decoration: none;
 }
 
-.header-link__selected{
+.header_link__selected{
   vertical-align: middle;
   font-family: 'Eudoxus Sans', SansSerif;
   font-style: normal;

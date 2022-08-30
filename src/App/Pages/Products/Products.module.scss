@@ -1,0 +1,32 @@
+.product__heading {
+  font-family: 'Eudoxus Sans', SansSerif, serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 130%;
+  /* or 83px */
+  text-align: center;
+  color: #151411;
+  margin-bottom: 20px;
+}
+
+.product__paragraph {
+  width: 600px;
+  margin: auto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 180%;
+  /* or 32px */
+  text-align: center;
+  color: #AFADB5;
+  margin-bottom: 80px;
+}
+
+.product__search{
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between; /*Центрирование по горизонтали*/
+  width: 1230px;
+}

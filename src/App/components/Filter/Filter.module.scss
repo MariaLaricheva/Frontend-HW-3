@@ -1,0 +1,63 @@
+.filter{
+    width: 190px;
+}
+
+.filter_header {
+    height: 84px;
+    background-color: #ffffff;
+    border-radius: 0;
+    border-color: transparent;
+    font-size: 18px;
+    box-shadow: 0px 4px 120px rgba(175, 173, 181, 0.15);
+    width: 100%;
+    position: relative;
+    font-family: 'Eudoxus Sans', SansSerif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 180%;
+    /* or 32px */
+    color: #151411;
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+    display: flex;
+    justify-content: center; /*Центрирование по горизонтали*/
+    /*можно попробовать space-evenly или space-between*/
+    align-items: center;     /*Центрирование по вертикали */
+}
+
+.filter_header:focus {
+    border: 1px solid #518581;
+}
+
+.filter_header:disabled {
+    opacity: 0.7;
+}
+
+.filter_options{
+    z-index: 10;
+    margin-top: 12px;
+    position: absolute;
+    width: 190px;
+}
+
+
+.filter_element{
+    position: relative;
+    width: 190px;
+    font-family: 'Roboto', serif;
+    font-weight: 400;
+    border-radius: 0;
+    border-color: transparent;
+    padding: 17px 0;
+
+    color: #000000;
+    font-size: 14px;
+    text-align: center;
+}
+
+.filter_element__selected{
+    color: #518581;
+}
