@@ -1,0 +1,40 @@
+@mixin large-text {
+  font: {
+    family: 'Eudoxus Sans', serif;
+    style: normal;
+    size: 44px;
+    weight: 700;
+  }
+  line-height: 130%;
+
+  color: #151411;
+}
+
+@mixin p-gray-text {
+  font: {
+    family: 'Eudoxus Sans', serif;
+    style: normal;
+    size: 18px;
+    weight: 500;
+  }
+
+  line-height: 180%;
+  /* or 32px */
+
+  color: #AFADB5;
+}
+
+@mixin p-black-text {
+  font: {
+    family: 'Eudoxus Sans', serif;
+    style: normal;
+    size: 18px;
+    weight: 500;
+  }
+
+  line-height: 180%;
+  /* or 32px */
+
+  color: #151411;
+}
+

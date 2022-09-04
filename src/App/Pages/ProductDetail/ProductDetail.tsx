@@ -1,103 +1,92 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import Button from "@components/Button";
 import { ButtonColor } from "@components/Button/Button";
-import ProductList from "@components/ProductList/ProductList";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import Card from "@components/Card";
+import Loader from "@components/Loader";
+import { Meta } from "@utils/meta";
+import { observer } from "mobx-react-lite";
+import { useNavigate, useParams } from "react-router-dom";
 
-import ProductType from "../../../customTypes/productType";
+import { useRootStore } from "../../../context/StoreContext";
 import styles from "./ProductDetail.module.scss";
 
 
 const ProductDetail = () => {
   // Получаем из url id товара
   // (id, поскольку записали :id в path роута)
-  const [product, setProduct] = useState<ProductType>();
   const { id } = useParams();
 
+  const { productDetailStore } = useRootStore();
+
   useEffect(() => {
-    fetch();
-  }, [id]);
+    if (id) {
+    productDetailStore.getProductDetailByID(id.toString());}
+    // eslint-disable-next-line no-console
+    console.log("поменялся айди, грузим товары")
+  }, [id])
 
-  const fetch = async () => {
-    const result = await axios({
-      method: "get",
-      url: "https://fakestoreapi.com/products/" + id,
-    });
-    setProduct({
-      id: result.data.id,
-      title: result.data.title,
-      category: result.data.category,
-      description: result.data.description,
-      image: result.data.image,
-      price: result.data.price,
-      rating: result.data.rating,
-    });
-  };
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log("поменялась мета: ", productDetailStore.meta)
+  }, [productDetailStore])
 
-  //стоит заменить работу с undefined на null, ибо undefined - нечто непреднамеренное,
-  // а null сразу даёт понять, что мы предполагаем, что product может быть ничем
+  let navigate = useNavigate();
 
-
-  //заглушка чтобы не ругалось
-  function getProduct() {
-    if (product !== undefined) {
-      return (
+  // @ts-ignore
+  return (
+    <div>
+      {(productDetailStore.meta === Meta.error) && <div>Такого нет уходите</div>}
+      {(productDetailStore.meta === Meta.loading) ? <Loader/> :
+      (productDetailStore.product && productDetailStore.meta === Meta.success) &&
         <div className={styles.product__display}>
           <img
-            src={product.image}
+            src={productDetailStore.product.image}
             alt={"изображение отсутствует"}
             className={styles.product__image}
           />
-          <div>
-            <h2 className={styles.product__name}>{product.title}</h2>
-            <h3 className={styles.product__category}>{product.category}</h3>
-            <p className={styles.product__description}>{product.description}</p>
-            <div className={styles.product__price}>{"$" + product.price}</div>
-            <div className={styles.product__actions}>
-              <Button
-                color={ButtonColor.primary}
-                className={styles.product__actions__btn}
-              >
-                Buy now
-              </Button>
-              <Button
-                color={ButtonColor.secondary}
-                className={styles.product__actions__btn}
-              >
-                Add to chart
-              </Button>
+            <div>
+              <h2 className={styles.product__name}>{productDetailStore.product.title}</h2>
+              <h3 className={styles.product__category}>{productDetailStore.product.category}</h3>
+              <p className={styles.product__description}>{productDetailStore.product.description}</p>
+              <div className={styles.product__price}>{"$" + productDetailStore.product.price}</div>
+              <div className={styles.product__actions}>
+                <Button
+                  color={ButtonColor.primary}
+                  className={styles.product__actions__btn}
+                > Buy now </Button>
+                <Button
+                  color={ButtonColor.secondary}
+                  className={styles.product__actions__btn}
+                > Add to chart </Button>
+              </div>
             </div>
-          </div>
         </div>
-      );
-    } else {
-      return "грузимся";
-    }
-  }
+      }
+      { productDetailStore.relItemsMeta &&
+        <div>
+          <h3 className={styles.product__other}>Related items</h3>
+          {(productDetailStore.relItemsMeta!==Meta.error) &&
+            productDetailStore.relatedItems?.map(
+              (product) =>
+                product && (
+                  <Card
+                    key = {product.id}
+                    image={product.image}
+                    title={product.title}
+                    subtitle={product.category}
+                    onClick={() => {
+                      navigate(`/product/${product.id}`, { replace: true });
+                    }}
+                  />
+                )
+            )}
+        </div>
 
-  const getCategory = () => {
-    if (typeof product !== "undefined") {
-      return product.category;
-    } else {
-      return "jewelery";
-    }
-  };
+      }
 
-  // Выводим  найденного товара
-  return (
-    <div>
-      {getProduct()}
-      <h3 className={styles.product__other}>Related items</h3>
-      {product && (
-        <ProductList
-          filter={[{ key: "0", value: getCategory() }]}
-          limit={3}
-        />
-      )}
     </div>
   );
 };
 
-export default ProductDetail;
+export default observer(ProductDetail);

@@ -3,13 +3,15 @@ import React from "react";
 import Header from "@components/Header";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+import { StoreProvider } from "../context/StoreContext";
 import styles from "./App.module.scss";
 import ProductDetail from "./Pages/ProductDetail";
 import Products from "./Pages/Products";
 
+
 const App = () => {
   return (
-    <div className={styles.App}>
+    <StoreProvider>
       <BrowserRouter>
         <Header />
         <Routes>
@@ -20,7 +22,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </StoreProvider>
   );
 };
 
