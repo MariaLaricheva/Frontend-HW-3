@@ -33,11 +33,15 @@ const ProductDetail = () => {
 
   let navigate = useNavigate();
 
-  // @ts-ignore
+  // eslint-disable-next-line no-console
+  console.log(productDetailStore.relItemsMeta)
+  // eslint-disable-next-line no-console
+  console.log(productDetailStore.relatedItems)
+
   return (
     <div>
       {(productDetailStore.meta === Meta.error) && <div>Такого нет уходите</div>}
-      {(productDetailStore.meta === Meta.loading) ? <Loader/> :
+      {(productDetailStore.meta === Meta.loading) ? <Loader className={styles.product__loader}/> :
       (productDetailStore.product && productDetailStore.meta === Meta.success) &&
         <div className={styles.product__display}>
           <img
@@ -63,15 +67,17 @@ const ProductDetail = () => {
             </div>
         </div>
       }
-      { productDetailStore.relItemsMeta &&
+      {(productDetailStore.relItemsMeta !== Meta.error) &&
         <div>
           <h3 className={styles.product__other}>Related items</h3>
-          {(productDetailStore.relItemsMeta!==Meta.error) &&
-            productDetailStore.relatedItems?.map(
+          {(productDetailStore.relItemsMeta === Meta.loading) && <Loader className={styles.product__loader}/> }
+          {(productDetailStore.relItemsMeta === Meta.success) &&
+            <div className={styles.product__related}>
+              {productDetailStore.relatedItems.map(
               (product) =>
                 product && (
                   <Card
-                    key = {product.id}
+                    key={product.id}
                     image={product.image}
                     title={product.title}
                     subtitle={product.category}
@@ -81,10 +87,10 @@ const ProductDetail = () => {
                   />
                 )
             )}
+          </div>
+          }
         </div>
-
       }
-
     </div>
   );
 };

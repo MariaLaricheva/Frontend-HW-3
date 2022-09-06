@@ -3,7 +3,13 @@ import { ILocalStore } from "@utils/useLocalStore";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 
 import { getProduct, getProductByCategory } from "../../api/fetchApi";
-import ProductType from "../../models/productType";
+import { normalizeProductType, ProductTypeApi } from "../models/productType";
+import {
+  CollectionModel,
+  getInitialCollectionModel,
+  linearizeCollection,
+  normalizeCollection
+} from "../models/shared/collectionModel";
 
 type PrivateFields = "_meta" | "_product" | "_relatedItems" | "_category" | "_relItemsMeta" ;
 
@@ -13,9 +19,9 @@ export interface IProductDetailStore {
 
 export default class ProductDetailStore implements ILocalStore, IProductDetailStore{
   private _meta: Meta = Meta.initial;
-  private _product: ProductType | null = null;
+  private _product: ProductTypeApi | null = null;
   private _id: number | null = null;
-  private _relatedItems: ProductType[] = [];
+  private _relatedItems: CollectionModel<number, ProductTypeApi> = getInitialCollectionModel();
   private _relItemsMeta: Meta = Meta.initial;
   private _category: string = "";
 
@@ -44,12 +50,12 @@ export default class ProductDetailStore implements ILocalStore, IProductDetailSt
     return this._meta;
   }
 
-  get product(): ProductType | null {
+  get product(): ProductTypeApi | null {
     return this._product;
   }
 
-  get relatedItems(): ProductType[] {
-    return this._relatedItems;
+  get relatedItems(): ProductTypeApi[] {
+    return linearizeCollection(this._relatedItems);
   }
 
   get relItemsMeta(): Meta {
@@ -79,6 +85,7 @@ export default class ProductDetailStore implements ILocalStore, IProductDetailSt
           this._product = response.data;
           this._id = response.data.id;
           this._category = response.data.category;
+          this.getRelatedItems();
         }
       )
     }
@@ -95,15 +102,20 @@ export default class ProductDetailStore implements ILocalStore, IProductDetailSt
     try {
       const response = await getProductByCategory(this._category);
       runInAction(() => {
-          this._relItemsMeta = Meta.success;
-          this._product = response.data;
+        const list: ProductTypeApi[] = [];
+        for (const item of response.data){
+          list.push(normalizeProductType(item))
+        };
+        this._relItemsMeta = Meta.success;
+        this._relatedItems = normalizeCollection(list, (listItem => listItem.id));
+        return;
         }
       )
     }
     catch (error){
       runInAction(() => {
         this._relItemsMeta = Meta.error;
-        this._product = null;
+        this._relatedItems = getInitialCollectionModel();
       })
     }
   }

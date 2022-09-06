@@ -1,9 +1,17 @@
 import { Meta } from "@utils/meta";
 import { ILocalStore } from "@utils/useLocalStore";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
+import { action, computed, IReactionDisposer, makeObservable, observable, reaction, runInAction } from "mobx";
 
 import { getProductWithLimit } from "../../api/fetchApi";
-import ProductType from "../../models/productType";
+import { normalizeProductType, ProductTypeApi } from "../models";
+import {
+  CollectionModel,
+  getInitialCollectionModel,
+  linearizeCollection,
+  normalizeCollection
+} from "../models/shared/collectionModel";
+import rootStore from "../RootStore/instance"
+
 
 type PrivateFields = "_meta" | "_products" | "_hasMore" | "_limit";
 
@@ -13,7 +21,7 @@ export interface IProductStore {
 
 export default class ProductStore implements ILocalStore, IProductStore{
   private _meta: Meta = Meta.initial;
-  private _products: ProductType[] = [];
+  private _products: CollectionModel<number, ProductTypeApi> = getInitialCollectionModel();
   private _hasMore: boolean = true;
   private _limit: number = 3;
 
@@ -31,7 +39,9 @@ export default class ProductStore implements ILocalStore, IProductStore{
       limit: computed,
       //actions - менять observable (переменные внутри стора)
       getProducts: action.bound,
-      fetchMore: action.bound
+      fetchMore: action.bound,
+
+      //reactions
     })
   }
 
@@ -39,8 +49,8 @@ export default class ProductStore implements ILocalStore, IProductStore{
     return this._meta;
   }
 
-  get products(): ProductType[]{
-    return this._products;
+  get products(): ProductTypeApi[]{
+    return linearizeCollection(this._products);
   }
 
   get hasMore(): boolean{
@@ -54,11 +64,11 @@ export default class ProductStore implements ILocalStore, IProductStore{
   fetchMore(){
     if (this.hasMore)
     {this._limit = this._limit + 3;}
-    this.getProducts();
-    if (this._products.length <= this.limit)
-    {
-      this._hasMore = false;
-    }
+    this.getProducts().then(() => {
+      if (this._products.order.length <= this.limit)
+      {
+        this._hasMore = false;
+      }});
   }
 
   async getProducts(){
@@ -69,20 +79,58 @@ export default class ProductStore implements ILocalStore, IProductStore{
           if (response.data.length < this._limit) {
             this._hasMore = false;
           }
+          const list: ProductTypeApi[] = [];
+          for (const item of response.data){
+            list.push(normalizeProductType(item))
+          };
           this._meta = Meta.success;
-          this._products = [...response.data];
+          this._products = normalizeCollection(list, (listItem => listItem.id));
+          if (rootStore.query.getParam('search')){
+            this.searchProduct();
+          };
+          return;
         }
       )
     }
     catch (error){
       runInAction(() => {
         this._meta = Meta.error;
-        this._products = [...[]];
+        this._products = getInitialCollectionModel();
       })
     }
   }
 
   destroy() {
-    //устрой дестрой порядок это отстой
+    //
   }
+
+  private readonly _qpReaction: IReactionDisposer = reaction(
+    () => rootStore.query.getParam('_search'), //было просто "серч"
+    // eslint-disable-next-line no-console
+    (search) => {console.log("search value changed: ", search)}
+    //здесь бы вставить функцию которая отгружает серч
+  )
+
+
+  searchProduct = (): void => {
+    let searchTerm = rootStore.query.getParam('search');
+    // eslint-disable-next-line no-console
+    console.log("searchTerm", searchTerm);
+    // eslint-disable-next-line no-console
+    console.log("поиск по строке", rootStore.query.getParam('search'));
+      if (searchTerm) {
+        const filteredItems = linearizeCollection(this._products).filter(
+          // @ts-ignore
+          product => product.title.includes(searchTerm.toString())
+        )
+      this._products = normalizeCollection(filteredItems, (listItem => listItem.id));
+        // eslint-disable-next-line no-console
+        console.log("поиск сделан", searchTerm);
+      }
+      else {
+        // eslint-disable-next-line no-console
+        console.log("поиска нет", searchTerm);
+        this.getProducts();
+      }
+    }
 };

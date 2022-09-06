@@ -11,18 +11,61 @@ import Loupe from "@static/search-normal.svg";
 import { Meta } from "@utils/meta";
 import axios from "axios";
 import { observer } from "mobx-react-lite";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { useRootStore } from "../../../context/StoreContext";
+import { useQueryParamStoreInit } from "../../../store/RootStore/hooks/useQueryParamStoreInit";
 import styles from "./Products.module.scss";
 
 
 const Products = () => {
+
+  useQueryParamStoreInit();
+
   const [categories, setCategories] = useState<optionType[]>([]);
   const [limit, setLimit] = useState(3);
   const [filter, setFilter] = useState<optionType[]>([]);
+  let [searchParams, setSearchParams] = useSearchParams();
+  //переменная для вставки в строку инпут
+  const searchTerm = searchParams.get('search') || '';
 
   const { productStore } = useRootStore();
+
+  //колбек в onChange инпута
+  let changeSearchParam = (value: string) => {
+    if (value) {
+      setSearchParams({search: value});
+      //обнулить hasmore у продактСтора
+    }
+    else {
+      setSearchParams({})
+      //productStore.getProducts()
+      //обнулить hasMore у продактСтора
+    }
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log("продукты загружены ёпт")
+    productStore.searchProduct();
+  }, [searchTerm])
+
+
+  useEffect(() => {
+    productStore.getProducts();
+    // eslint-disable-next-line no-console
+    console.log("продукты загружены ёпт")
+  }, [productStore])
+
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log("поменялся лимит")
+
+    productStore.fetchMore();
+    // eslint-disable-next-line no-console
+    console.log("вызываем фетч мор ")
+  }, [limit])
 
   useEffect(() => {
     fetch();
@@ -42,37 +85,13 @@ const Products = () => {
     );
   };
 
-  useEffect(() => {
-    productStore.getProducts();
-    // eslint-disable-next-line no-console
-    console.log("продукты загружены ёпт")
-  }, [productStore])
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log("мета изменилась и продукты поменялись")
-    // eslint-disable-next-line no-console
-    console.log("мета: ", productStore.meta)
-  }, [productStore.meta]) //почему-то не отслеживает мету мхмхмх
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log("поменялся лимит")
-
-    productStore.fetchMore();
-    // eslint-disable-next-line no-console
-    console.log("вызываем фетч мор ")
-  }, [limit])
-
-
   let navigate = useNavigate();
 
+let searchBarValue: string = "";
 
-  window.onscroll = function (ev) {
+  window.onscroll = function () {
     if (window.innerHeight + window.scrollY + 5 >= document.body.offsetHeight) {
-      if (limit < 20) {
-        setLimit(limit + 3);
-      }
+        setLimit(limit + 1);
     }
   };
 
@@ -87,8 +106,9 @@ const Products = () => {
       <div className={styles.product__search}>
         <Input
           type={"text"}
-          value={"Search"}
-          onChange={() => {}}
+          placeholder={"Search"}
+          value={searchTerm}
+          onChange={changeSearchParam}
           className={"search-bar-input"}
           img={Loupe}
           button={<Button>Find now</Button>}
@@ -125,7 +145,11 @@ const Products = () => {
               )
           )}
         {(productStore.meta===Meta.loading) && <Loader/>}
-        {(!productStore.hasMore) && <div>больше нет!! {limit}</div>}
+        {(!productStore.hasMore) &&
+          <div>
+            больше нет!! {limit}
+          </div>
+        }
 
       </div>
     </div>

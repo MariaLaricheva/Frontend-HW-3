@@ -88,3 +88,19 @@
   color: #151411;
 
 }
+
+.product__related{
+  margin: 0 auto;
+  width: 1200px;
+  display: flex;
+  justify-content: space-around;
+  /*можно попробовать space-evenly или space-between*/
+  align-items: center;     /*Центрирование по вертикали */
+  flex-wrap: wrap;
+}
+
+.product__loader{
+  margin: 200px auto 0;
+  display: flex;
+  justify-content: space-around;
+}
