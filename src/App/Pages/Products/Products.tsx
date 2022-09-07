@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Button from "@components/Button/Button";
 import Card from "@components/Card";
@@ -23,7 +23,6 @@ const Products = () => {
   useQueryParamStoreInit();
 
   const [categories, setCategories] = useState<optionType[]>([]);
-  const [limit, setLimit] = useState(3);
   const [filter, setFilter] = useState<optionType[]>([]);
   let [searchParams, setSearchParams] = useSearchParams();
   //переменная для вставки в строку инпут
@@ -32,44 +31,31 @@ const Products = () => {
   const { productStore } = useRootStore();
 
   //колбек в onChange инпута
-  let changeSearchParam = (value: string) => {
-    if (value) {
-      setSearchParams({search: value});
-      //обнулить hasmore у продактСтора
-    }
-    else {
-      setSearchParams({})
-      //productStore.getProducts()
-      //обнулить hasMore у продактСтора
-    }
-  }
+  let changeSearchParam = React.useCallback(
+    (value: string) => {
+      if (value) {
+        setSearchParams({search: value});
+        productStore.toggleHasMore(true);
+      }
+      else {
+        setSearchParams({})
+        productStore.getProducts();
+        productStore.toggleHasMore(true);
+      };
+  }, [])
 
   useEffect(() => {
     // eslint-disable-next-line no-console
-    console.log("продукты загружены ёпт")
+    console.log("hasMore", productStore.hasMore)
+    productStore.getProducts();
+  }, [productStore])
+
+  useEffect(() => {
     productStore.searchProduct();
   }, [searchTerm])
 
-
-  useEffect(() => {
-    productStore.getProducts();
-    // eslint-disable-next-line no-console
-    console.log("продукты загружены ёпт")
-  }, [productStore])
-
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log("поменялся лимит")
-
-    productStore.fetchMore();
-    // eslint-disable-next-line no-console
-    console.log("вызываем фетч мор ")
-  }, [limit])
-
   useEffect(() => {
     fetch();
-    setLimit(3);
   }, [filter]);
 
   const fetch = async () => {
@@ -85,15 +71,19 @@ const Products = () => {
     );
   };
 
-  let navigate = useNavigate();
-
-let searchBarValue: string = "";
-
   window.onscroll = function () {
     if (window.innerHeight + window.scrollY + 5 >= document.body.offsetHeight) {
-        setLimit(limit + 1);
+      // eslint-disable-next-line no-console
+      console.log("долистали")
+      // eslint-disable-next-line no-console
+        console.log("hasMore", productStore.hasMore)
+        if (productStore.hasMore){
+        productStore.fetchMore();
+        }
     }
   };
+
+  let navigate = useNavigate();
 
   return (
     <div>
@@ -147,7 +137,7 @@ let searchBarValue: string = "";
         {(productStore.meta===Meta.loading) && <Loader/>}
         {(!productStore.hasMore) &&
           <div>
-            больше нет!! {limit}
+            больше нет!!
           </div>
         }
 

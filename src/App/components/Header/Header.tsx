@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import styles from "@components/Header/Header.module.scss";
 import Bag from "@static/bag.svg";
@@ -12,9 +12,12 @@ const Header = () => {
 
   useEffect(() => {
     //стили (подсвечивание выбранной вкладки) должны поменяться при изменении адреса (??)
-    console.log('чет поменялось');
+    // eslint-disable-next-line no-console
     console.log('текущий адрес - ', window.location.pathname);
   }, [window.location.pathname]);
+
+  // eslint-disable-next-line no-console
+  console.log("Header is rendered");
 
   function isSelected(address: string) {
      if (window.location.pathname === address){
@@ -23,8 +26,8 @@ const Header = () => {
      return false;
    }
    //множество Link, которые довольно однообразны,
-  // можно бы было записать их всех в массив,
-  // а потом сделать .map по ним, вставляя что куда надо
+   // можно бы было записать их всех в массив,
+   // а потом сделать .map по ним, вставляя что куда надо
 
   return (
     <header className={styles.header}>
@@ -54,4 +57,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

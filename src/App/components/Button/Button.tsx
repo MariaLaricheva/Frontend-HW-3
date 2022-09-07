@@ -3,6 +3,7 @@ import React from "react";
 import Loader from "@components/Loader/Loader";
 import { LoaderSize } from "@components/Loader/Loader";
 import classNames from "classnames";
+import { shallowEnhancer } from "mobx/dist/types/modifiers";
 
 import styles from "./Button.module.scss";
 
@@ -34,6 +35,8 @@ const Button: React.FC<ButtonProps> = ({
   className,
   ...props
 }) => {
+  // eslint-disable-next-line no-console
+  console.log("Button is rendered");
   return (
     <button
       disabled={loading || props.disabled}
@@ -55,4 +58,4 @@ Button.defaultProps = {
   color: ButtonColor.primary,
 };
 
-export default Button;
+export default React.memo(Button);

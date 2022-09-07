@@ -105,4 +105,4 @@ Filter.defaultProps = {
   disabled: false,
 };
 
-export default Filter;
+export default React.memo(Filter);

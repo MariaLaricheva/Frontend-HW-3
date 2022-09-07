@@ -40,7 +40,7 @@ export default class ProductStore implements ILocalStore, IProductStore{
       //actions - менять observable (переменные внутри стора)
       getProducts: action.bound,
       fetchMore: action.bound,
-
+      toggleHasMore: action.bound
       //reactions
     })
   }
@@ -61,14 +61,21 @@ export default class ProductStore implements ILocalStore, IProductStore{
     return this._limit;
   }
 
+  toggleHasMore(value: boolean){
+    this._hasMore = value;
+  }
+
   fetchMore(){
-    if (this.hasMore)
-    {this._limit = this._limit + 3;}
-    this.getProducts().then(() => {
-      if (this._products.order.length <= this.limit)
-      {
-        this._hasMore = false;
-      }});
+    if (this.hasMore){
+      this._limit = this._limit + 1;
+      this.getProducts().then(() => {
+        if (this._products.order.length < this.limit)
+        {
+          this._hasMore = false;
+        }
+        else this._hasMore = true;
+      });
+    }
   }
 
   async getProducts(){
@@ -76,9 +83,11 @@ export default class ProductStore implements ILocalStore, IProductStore{
     try {
       const response = await getProductWithLimit(this._limit);
       runInAction(() => {
-          if (response.data.length < this._limit) {
+          /*
+         if (response.data.length < this._limit) {
             this._hasMore = false;
           }
+          */
           const list: ProductTypeApi[] = [];
           for (const item of response.data){
             list.push(normalizeProductType(item))
@@ -105,31 +114,23 @@ export default class ProductStore implements ILocalStore, IProductStore{
   }
 
   private readonly _qpReaction: IReactionDisposer = reaction(
-    () => rootStore.query.getParam('_search'), //было просто "серч"
+    () => rootStore.query.getParam('search'),
     // eslint-disable-next-line no-console
     (search) => {console.log("search value changed: ", search)}
     //здесь бы вставить функцию которая отгружает серч
   )
 
-
   searchProduct = (): void => {
     let searchTerm = rootStore.query.getParam('search');
-    // eslint-disable-next-line no-console
-    console.log("searchTerm", searchTerm);
-    // eslint-disable-next-line no-console
-    console.log("поиск по строке", rootStore.query.getParam('search'));
       if (searchTerm) {
         const filteredItems = linearizeCollection(this._products).filter(
+          //т.к. выше if (searchterm), код не выполнится если серчтерм undefined
           // @ts-ignore
-          product => product.title.includes(searchTerm.toString())
+          product => product.title.toLowerCase().includes(searchTerm.toString().toLowerCase())
         )
       this._products = normalizeCollection(filteredItems, (listItem => listItem.id));
-        // eslint-disable-next-line no-console
-        console.log("поиск сделан", searchTerm);
       }
       else {
-        // eslint-disable-next-line no-console
-        console.log("поиска нет", searchTerm);
         this.getProducts();
       }
     }

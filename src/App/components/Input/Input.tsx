@@ -29,6 +29,8 @@ export const Input: React.FC<InputProps> = ({
   button,
   ...props
 }) => {
+  // eslint-disable-next-line no-console
+  console.log("Input is rendered");
   return (
     <div className={styles.searchbar}>
       {img && <img src={img} alt={"иконка"} className={styles.searchbar_img} />}
@@ -51,4 +53,4 @@ export const Input: React.FC<InputProps> = ({
   );
 };
 
-export default Input;
+export default React.memo(Input);

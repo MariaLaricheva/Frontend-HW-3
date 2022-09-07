@@ -22,21 +22,10 @@ const ProductDetail = () => {
   useEffect(() => {
     if (id) {
     productDetailStore.getProductDetailByID(id.toString());}
-    // eslint-disable-next-line no-console
-    console.log("поменялся айди, грузим товары")
   }, [id])
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log("поменялась мета: ", productDetailStore.meta)
-  }, [productDetailStore])
 
   let navigate = useNavigate();
-
-  // eslint-disable-next-line no-console
-  console.log(productDetailStore.relItemsMeta)
-  // eslint-disable-next-line no-console
-  console.log(productDetailStore.relatedItems)
 
   return (
     <div>
