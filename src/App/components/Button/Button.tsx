@@ -35,8 +35,6 @@ const Button: React.FC<ButtonProps> = ({
   className,
   ...props
 }) => {
-  // eslint-disable-next-line no-console
-  console.log("Button is rendered");
   return (
     <button
       disabled={loading || props.disabled}

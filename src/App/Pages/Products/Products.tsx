@@ -45,8 +45,6 @@ const Products = () => {
   }, [])
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log("hasMore", productStore.hasMore)
     productStore.getProducts();
   }, [productStore])
 
@@ -73,10 +71,6 @@ const Products = () => {
 
   window.onscroll = function () {
     if (window.innerHeight + window.scrollY + 5 >= document.body.offsetHeight) {
-      // eslint-disable-next-line no-console
-      console.log("долистали")
-      // eslint-disable-next-line no-console
-        console.log("hasMore", productStore.hasMore)
         if (productStore.hasMore){
         productStore.fetchMore();
         }

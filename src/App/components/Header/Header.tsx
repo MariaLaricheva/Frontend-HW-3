@@ -16,8 +16,6 @@ const Header = () => {
     console.log('текущий адрес - ', window.location.pathname);
   }, [window.location.pathname]);
 
-  // eslint-disable-next-line no-console
-  console.log("Header is rendered");
 
   function isSelected(address: string) {
      if (window.location.pathname === address){
