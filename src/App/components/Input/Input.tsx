@@ -9,7 +9,7 @@ export type InputProps = {
   value: string;
   /** Callback, вызываемый при вводе данных в поле */
   onChange: (value: string) => void;
-  // лучше вставить в зачение event,
+  // лучше вставить в значение event,
   // а потом из event.target.value будет доставаться значение чекбокса
   className?: string;
   /** адрес иконки, если есть*/
@@ -51,4 +51,4 @@ export const Input: React.FC<InputProps> = ({
   );
 };
 
-export default Input;
+export default Input; //в memo оборачивать нет смысла т.к. часто перерендеривается

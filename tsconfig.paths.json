@@ -4,11 +4,14 @@
     "paths": {
       "@components/*": ["src/App/components/*"],
       "@config/*": ["src/config/*"],
+      "@context/*": ["src/context/*"],
+      "@static/*": ["src/static/*"],
+      "@store/*": ["src/store/*"],
       "@styles/*": ["src/styles/*"],
       "@utils/*": ["src/utils/*"],
-      "@static/*": ["src/static/*"],
-      "@custom-types/*": ["src/custom-types"],
-      "@pages/*": ["src/App/Pages"]
+      "@customTypes/*": ["src/customTypes/*"],
+      "@pages/*": ["src/App/Pages/*"],
+      "@models/*": ["src/store/models/*"]
     }
   }
 }
