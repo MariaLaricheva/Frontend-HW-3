@@ -13,7 +13,7 @@ export const useLocalStore = <T extends ILocalStore> (creator: () => T) => {
 
   React.useEffect(() => {
     return () => container.current?.destroy()
-  }) //массива зависимостей нет, в примере он был пустой
+  }, [])
 
   return container.current
 }

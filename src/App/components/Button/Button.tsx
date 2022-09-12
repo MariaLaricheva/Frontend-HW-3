@@ -3,7 +3,6 @@ import React from "react";
 import Loader from "@components/Loader/Loader";
 import { LoaderSize } from "@components/Loader/Loader";
 import classNames from "classnames";
-import { shallowEnhancer } from "mobx/dist/types/modifiers";
 
 import styles from "./Button.module.scss";
 

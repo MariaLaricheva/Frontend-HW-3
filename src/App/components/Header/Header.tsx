@@ -6,7 +6,7 @@ import Logo from "@static/logo.svg";
 import Name from "@static/name.svg";
 import User from "@static/user.svg";
 import classNames from "classnames";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 
@@ -18,11 +18,9 @@ const Header = () => {
 
 
   function isSelected(address: string) {
-     if (window.location.pathname === address){
-       return true;
-     }
-     return false;
+     return window.location.pathname === address;
    }
+
    //множество Link, которые довольно однообразны,
    // можно бы было записать их всех в массив,
    // а потом сделать .map по ним, вставляя что куда надо

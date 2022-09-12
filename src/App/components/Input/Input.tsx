@@ -51,4 +51,4 @@ export const Input: React.FC<InputProps> = ({
   );
 };
 
-export default React.memo(Input);
+export default Input; //в memo оборачивать нет смысла т.к. часто перерендеривается

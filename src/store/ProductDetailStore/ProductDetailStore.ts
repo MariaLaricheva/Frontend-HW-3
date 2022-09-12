@@ -1,29 +1,29 @@
-import { Meta } from "@utils/meta";
-import { ILocalStore } from "@utils/useLocalStore";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
-
-import { getProduct, getProductByCategory } from "../../api/fetchApi";
-import { normalizeProductType, ProductTypeApi } from "../models/productType";
+import { normalizeProductType, ProductTypeModel } from '@models/productType';
 import {
   CollectionModel,
   getInitialCollectionModel,
   linearizeCollection,
   normalizeCollection
-} from "../models/shared/collectionModel";
+} from '@models/shared/collectionModel';
+import { getProduct, getProductByCategory } from "@utils/fetchApi";
+import { Meta } from "@utils/meta";
+import { ILocalStore } from "@utils/useLocalStore";
+import { action, computed, makeObservable, observable, runInAction } from "mobx";
 
 type PrivateFields = "_meta" | "_product" | "_relatedItems" | "_category" | "_relItemsMeta" ;
 
+/* если нужен - добавить в имплемент после айЛокалСтор
 export interface IProductDetailStore {
   getProductDetailByID: (id: string | number) => Promise<void>
 }
+ */
 
-export default class ProductDetailStore implements ILocalStore, IProductDetailStore{
+export default class ProductDetailStore implements ILocalStore{
   private _meta: Meta = Meta.initial;
-  private _product: ProductTypeApi | null = null;
-  private _id: number | null = null;
-  private _relatedItems: CollectionModel<number, ProductTypeApi> = getInitialCollectionModel();
+  private _product: ProductTypeModel | null = null;
+  private _relatedItems: CollectionModel<number, ProductTypeModel> = getInitialCollectionModel();
   private _relItemsMeta: Meta = Meta.initial;
-  private _category: string = "";
+  private _category = "";
 
   constructor() {
     makeObservable<ProductDetailStore, PrivateFields>(this, {
@@ -36,13 +36,12 @@ export default class ProductDetailStore implements ILocalStore, IProductDetailSt
       // computed - получаем в компонентах
       meta: computed,
       product: computed,
-      id: computed,
       category: computed,
       relatedItems: computed,
       relItemsMeta: computed,
       //actions - менять observable (переменные внутри стора)
       getRelatedItems: action.bound,
-      getProductDetailByID: action.bound,
+      getProductDetailByID: action.bound, //если функция стрелочная - можно не прописывать bound
     })
   }
 
@@ -50,23 +49,16 @@ export default class ProductDetailStore implements ILocalStore, IProductDetailSt
     return this._meta;
   }
 
-  get product(): ProductTypeApi | null {
+  get product(): ProductTypeModel | null {
     return this._product;
   }
 
-  get relatedItems(): ProductTypeApi[] {
+  get relatedItems(): ProductTypeModel[] {
     return linearizeCollection(this._relatedItems);
   }
 
   get relItemsMeta(): Meta {
     return this._relItemsMeta;
-  }
-
-  get id(): number | null {
-    if (this.product) {
-      return this.product.id;
-    }
-    else {return null}
   }
 
   get category(): string | null{
@@ -80,14 +72,18 @@ export default class ProductDetailStore implements ILocalStore, IProductDetailSt
     this._meta = Meta.loading;
     try {
       const response = await getProduct(id);
-      runInAction(() => {
+      if (!response.data){
+        this._meta = Meta.error;
+        this._product = null;
+      }
+      else {
+        runInAction(() => {
           this._meta = Meta.success;
           this._product = response.data;
-          this._id = response.data.id;
           this._category = response.data.category;
           this.getRelatedItems();
-        }
-      )
+        })
+      }
     }
     catch (error){
       runInAction(() => {
@@ -102,15 +98,22 @@ export default class ProductDetailStore implements ILocalStore, IProductDetailSt
     try {
       const response = await getProductByCategory(this._category);
       runInAction(() => {
-        const list: ProductTypeApi[] = [];
-        for (const item of response.data){
-          list.push(normalizeProductType(item))
-        };
-        this._relItemsMeta = Meta.success;
-        this._relatedItems = normalizeCollection(list, (listItem => listItem.id));
-        return;
+        if (!response.data){
+          this._relItemsMeta = Meta.error;
+          this._relatedItems = getInitialCollectionModel();
         }
-      )
+        else {
+          const list: ProductTypeModel[] = [];
+          //list = response.data.map(normalizeProductType) - если без break
+          for (const item of response.data){
+            list.push(normalizeProductType(item))
+            if (list.length >= 3) { break }
+          }
+          this._relItemsMeta = Meta.success;
+          this._relatedItems = normalizeCollection(list, (listItem => listItem.id));
+          return;
+        }
+      })
     }
     catch (error){
       runInAction(() => {
@@ -122,6 +125,6 @@ export default class ProductDetailStore implements ILocalStore, IProductDetailSt
 
 
   destroy() {
-    //устрой дестрой порядок это отстой
+
   }
 }

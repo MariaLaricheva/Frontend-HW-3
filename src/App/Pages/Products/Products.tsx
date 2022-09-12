@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from 'react'
 
 import Button from "@components/Button/Button";
 import Card from "@components/Card";
@@ -6,17 +6,17 @@ import Filter from "@components/Filter";
 import Input from "@components/Input";
 import Loader from "@components/Loader";
 import { optionType } from "@components/MultiDropdown/MultiDropdown";
-import Total from "@components/Total";
 import Loupe from "@static/search-normal.svg";
+import { ProductTypeModel } from '@store/models'
+import ProductStore from '@store/ProductStore';
+import { useQueryParamStoreInit } from '@store/RootStore/hooks/useQueryParamStoreInit';
 import { Meta } from "@utils/meta";
+import { useLocalStore } from '@utils/useLocalStore';
 import axios from "axios";
 import { observer } from "mobx-react-lite";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { useRootStore } from "../../../context/StoreContext";
-import { useQueryParamStoreInit } from "../../../store/RootStore/hooks/useQueryParamStoreInit";
 import styles from "./Products.module.scss";
-
 
 const Products = () => {
 
@@ -24,14 +24,13 @@ const Products = () => {
 
   const [categories, setCategories] = useState<optionType[]>([]);
   const [filter, setFilter] = useState<optionType[]>([]);
-  let [searchParams, setSearchParams] = useSearchParams();
-  //переменная для вставки в строку инпут
+  const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
 
-  const { productStore } = useRootStore();
+  const productStore = useLocalStore(() => new ProductStore());
 
   //колбек в onChange инпута
-  let changeSearchParam = React.useCallback(
+  const changeSearchParam = React.useCallback(
     (value: string) => {
       if (value) {
         setSearchParams({search: value});
@@ -41,20 +40,26 @@ const Products = () => {
         setSearchParams({})
         productStore.getProducts();
         productStore.toggleHasMore(true);
-      };
-  }, [])
+      }
+  }, [productStore, setSearchParams]) //массив был пустой,
+                                            // добавить туда productStore и setSearchParams подсказал линтер??
 
   useEffect(() => {
     productStore.getProducts();
-  }, [productStore])
+  }, []) //если убрать пустой массив, перезагрузка происходит каждые полсекунды
 
   useEffect(() => {
     productStore.searchProduct();
-  }, [searchTerm])
+  }, [productStore, searchTerm]) // линтер сказал добавить productStore ??
 
   useEffect(() => {
     fetch();
   }, [filter]);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(productStore.total)
+  }, [productStore.total]);
 
   const fetch = async () => {
     const result = await axios({
@@ -79,6 +84,10 @@ const Products = () => {
 
   let navigate = useNavigate();
 
+  const onCardClick = useCallback((product: ProductTypeModel) => {
+    navigate(`/product/${product.id}`, { replace: true });
+  }, [])
+
   return (
     <div>
       <h1 className={styles.product__heading}>Products</h1>
@@ -89,11 +98,10 @@ const Products = () => {
 
       <div className={styles.product__search}>
         <Input
-          type={"text"}
-          placeholder={"Search"}
+          type="text"
+          placeholder="Search"
           value={searchTerm}
           onChange={changeSearchParam}
-          className={"search-bar-input"}
           img={Loupe}
           button={<Button>Find now</Button>}
         />
@@ -110,7 +118,10 @@ const Products = () => {
           }}
         />
       </div>
-      <Total filter={[]} />
+      <div className={styles.product__total_wrapper}>
+      <h1 className={styles.product__total_heading}>Total product </h1>
+      <h1 className={styles.product__total_value}>{productStore.total}</h1>
+      </div>
       <div className={styles.product__list}>
         {(productStore.meta===Meta.error) && <div>can't find products</div>}
         {(productStore.meta!==Meta.error) &&
@@ -122,9 +133,7 @@ const Products = () => {
                   image={product.image}
                   title={product.title}
                   subtitle={product.category}
-                  onClick={() => {
-                    navigate(`/product/${product.id}`, { replace: true });
-                  }}
+                  onClick={() => onCardClick(product)}
                 />
               )
           )}

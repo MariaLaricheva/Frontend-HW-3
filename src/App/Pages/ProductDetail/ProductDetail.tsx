@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+import React, { useEffect } from 'react'
 
 import Button from "@components/Button";
 import { ButtonColor } from "@components/Button/Button";
 import Card from "@components/Card";
 import Loader from "@components/Loader";
+import { ProductTypeModel } from '@store/models'
+import ProductDetailStore from '@store/ProductDetailStore'
 import { Meta } from "@utils/meta";
+import { useLocalStore } from '@utils/useLocalStore'
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useRootStore } from "../../../context/StoreContext";
 import styles from "./ProductDetail.module.scss";
 
 
@@ -17,15 +19,20 @@ const ProductDetail = () => {
   // (id, поскольку записали :id в path роута)
   const { id } = useParams();
 
-  const { productDetailStore } = useRootStore();
+  const productDetailStore = useLocalStore(() => new ProductDetailStore())
 
   useEffect(() => {
     if (id) {
-    productDetailStore.getProductDetailByID(id.toString());}
+    productDetailStore.getProductDetailByID(id.toString());
+    }
   }, [id])
 
-
   let navigate = useNavigate();
+
+  const onCardClick = React.useCallback(
+    (product: ProductTypeModel) =>
+    navigate(`/product/${product.id}`, { replace: true })
+  , [])
 
   return (
     <div>
@@ -35,7 +42,7 @@ const ProductDetail = () => {
         <div className={styles.product__display}>
           <img
             src={productDetailStore.product.image}
-            alt={"изображение отсутствует"}
+            alt="product image"
             className={styles.product__image}
           />
             <div>
@@ -70,9 +77,7 @@ const ProductDetail = () => {
                     image={product.image}
                     title={product.title}
                     subtitle={product.category}
-                    onClick={() => {
-                      navigate(`/product/${product.id}`, { replace: true });
-                    }}
+                    onClick={() => onCardClick(product)}
                   />
                 )
             )}
