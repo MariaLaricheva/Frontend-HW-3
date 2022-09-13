@@ -1,13 +1,13 @@
-import { normalizeProductType, ProductTypeModel } from '@models/productType';
+import { normalizeProductType, ProductTypeModel } from 'models/productType';
 import {
   CollectionModel,
   getInitialCollectionModel,
   linearizeCollection,
   normalizeCollection
-} from '@models/shared/collectionModel';
-import { getProduct, getProductByCategory } from "@utils/fetchApi";
-import { Meta } from "@utils/meta";
-import { ILocalStore } from "@utils/useLocalStore";
+} from 'models/shared/collectionModel';
+import { getProduct, getProductByCategory } from "utils/fetchApi";
+import { Meta } from "utils/meta";
+import { ILocalStore } from "utils/useLocalStore";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 
 type PrivateFields = "_meta" | "_product" | "_relatedItems" | "_category" | "_relItemsMeta" ;
@@ -110,7 +110,7 @@ export default class ProductDetailStore implements ILocalStore{
             if (list.length >= 3) { break }
           }
           this._relItemsMeta = Meta.success;
-          this._relatedItems = normalizeCollection(list, (listItem => listItem.id));
+          this._relatedItems = normalizeCollection(list, (listItem: { id: any; }) => listItem.id);
           return;
         }
       })

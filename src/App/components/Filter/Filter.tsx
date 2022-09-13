@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import filter_icon from "@static/filter.svg";
+import filter_icon from "static/filter.svg";
 import classNames from "classnames";
 
 import styles from "./Filter.module.scss";

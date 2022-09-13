@@ -1,7 +1,11 @@
+@import "styles/colors.scss";
+@import "styles/texts.scss";
+
 .input_custom {
     height: 86px;
     min-width: 300px;
-    font-size: 18px;
+    @include p-text;
+    color: $secondary-gray;
     border: transparent;
     padding: 0px 26px;
 }
@@ -21,22 +25,21 @@
     width: 1020px;
     height: 80px;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;     /*Центрирование по вертикали */
-    background-color: white;
-    box-shadow: 0 4px 12px
-    rgba(175, 173, 181, 0.15);
+    background-color: $primary-white;
+    box-shadow: 0 4px 12px $shadow-color;
 }
 
 .searchbar:focus-within{
     border: transparent;
-    outline: 1px solid #518581;
+    outline: 1px solid $primary-green;
 }
 
 .searchbar_img{
     width: 24px;
     padding: 30px 12px 30px 25px;
-    background-color: white;
+    background-color: $primary-white;
 }
 
 .searchbar_input{
@@ -45,5 +48,5 @@
 
 .searchbar_btn_wrapper{
     padding: 13.3px 26px;
-    background-color: white;
+    background-color: $primary-white;
 }

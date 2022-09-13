@@ -1,21 +1,14 @@
 import React, { useEffect } from "react";
 
-import styles from "@components/Header/Header.module.scss";
-import Bag from "@static/bag.svg";
-import Logo from "@static/logo.svg";
-import Name from "@static/name.svg";
-import User from "@static/user.svg";
+import styles from "components/Header/Header.module.scss";
+import Bag from "static/bag.svg";
+import Logo from "static/logo.svg";
+import Name from "static/name.svg";
+import User from "static/user.svg";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-
-  useEffect(() => {
-    //стили (подсвечивание выбранной вкладки) должны поменяться при изменении адреса (??)
-    // eslint-disable-next-line no-console
-    console.log('текущий адрес - ', window.location.pathname);
-  }, [window.location.pathname]);
-
 
   function isSelected(address: string) {
      return window.location.pathname === address;

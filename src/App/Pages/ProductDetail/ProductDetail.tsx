@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 
-import Button from "@components/Button";
-import { ButtonColor } from "@components/Button/Button";
-import Card from "@components/Card";
-import Loader from "@components/Loader";
-import { ProductTypeModel } from '@store/models'
-import ProductDetailStore from '@store/ProductDetailStore'
-import { Meta } from "@utils/meta";
-import { useLocalStore } from '@utils/useLocalStore'
+import Button from "components/Button";
+import { ButtonColor } from "components/Button/Button";
+import Card from "components/Card";
+import Loader from "components/Loader";
+import { ProductTypeModel } from 'store/models'
+import ProductDetailStore from 'store/ProductDetailStore'
+import { Meta } from "utils/meta";
+import { useLocalStore } from 'utils/useLocalStore'
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from "react-router-dom";
 

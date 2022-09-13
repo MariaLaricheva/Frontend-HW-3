@@ -1,12 +1,18 @@
+@import "styles/colors.scss";
+@import "styles/texts.scss";
+
+.product__page{
+  width: 1440px;
+  margin: 0 auto;
+}
+
+
 .product__display{
   margin: auto;
   width: 800px;
   display: flex;
   justify-content: center; /*Центрирование по горизонтали*/
-
-  font-family: 'Eudoxus Sans', SansSerif, serif;
   text-align: left;
-
   gap: 60px;
 }
 
@@ -15,51 +21,25 @@
 }
 
 .product__name{
-  /* Headings/H2 - Bold 44 */
+  @include large-text;
   text-align: left;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 44px;
-  line-height: 130%;
-  /* or 57px */
-
-  /* Text Color */
-  color: #151411;
-
 }
 
 .product__category{
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 180%;
-  /* or 32px */
-
-  /* Paragraph Color */
-  color: #AFADB5;
+  @include p-text;
+  color: $secondary-gray;
 
 }
 
 .product__description{
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 180%;
-  /* or 32px */
-
-  /* Paragraph Color */
-  color: #AFADB5;
+  @include p-text;
+  color: $secondary-gray;
 }
 
 .product__price{
-  font-style: normal;
-  font-weight: 700;
+  @include bold-text;
   font-size: 44px;
-  line-height: 130%;
-  /* or 57px */
-
-  /* Text Color */
-  color: #151411;
+  color: $primary-black;
 }
 
 .product__actions{
@@ -73,20 +53,11 @@
 }
 
 .product__other{
-  font-family: 'Eudoxus Sans', SansSerif, serif;
-  font-style: normal;
-  font-weight: 700;
+  @include bold-text;
   font-size: 32px;
-  line-height: 130%;
-  /* identical to box height, or 42px */
-
   letter-spacing: 0.01em;
-
   text-align: center;
-
-  /* Text Color */
-  color: #151411;
-
+  color: $primary-black;
 }
 
 .product__related{

@@ -1,10 +1,10 @@
 import React from "react";
 
-import Header from "@components/Header";
+import Header from "components/Header";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import ProductDetail from "./Pages/ProductDetail";
-import Products from "./Pages/Products";
+import ProductDetail from "pages/ProductDetail";
+import Products from "pages/Products";
 
 const App = () => {
   return (

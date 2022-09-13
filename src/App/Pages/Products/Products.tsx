@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import Button from "@components/Button/Button";
-import Card from "@components/Card";
-import Filter from "@components/Filter";
-import Input from "@components/Input";
-import Loader from "@components/Loader";
-import { optionType } from "@components/MultiDropdown/MultiDropdown";
-import Loupe from "@static/search-normal.svg";
-import { ProductTypeModel } from '@store/models'
-import ProductStore from '@store/ProductStore';
-import { useQueryParamStoreInit } from '@store/RootStore/hooks/useQueryParamStoreInit';
-import { Meta } from "@utils/meta";
-import { useLocalStore } from '@utils/useLocalStore';
+import Button from "components/Button/Button";
+import Card from "components/Card";
+import Filter from "components/Filter";
+import Input from "components/Input";
+import Loader from "components/Loader";
+import { optionType } from "components/MultiDropdown/MultiDropdown";
+import Loupe from "static/search-normal.svg";
+import { ProductTypeModel } from 'store/models'
+import ProductStore from 'store/ProductStore';
+import { useQueryParamStoreInit } from 'store/RootStore/hooks/useQueryParamStoreInit';
+import { Meta } from "utils/meta";
+import { useLocalStore } from 'utils/useLocalStore';
 import axios from "axios";
 import { observer } from "mobx-react-lite";
 import { useNavigate, useSearchParams } from "react-router-dom";

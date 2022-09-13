@@ -1,14 +1,15 @@
+@import "styles/colors.scss";
+@import "styles/texts.scss";
+
 .multidropdown__header {
     display: flex;
-    background-color: #D9D9D9;
+    background-color: $additional-lightgray;
     border-radius: 0;
     border-color: transparent;
-    color: black;
-    font-size: 18px;
-    font-family: 'Roboto', serif;
-    font-weight: 400;
+    color: $primary-black;
+    @include p-text;
     padding: 26px 62px;
-    box-shadow: 0px 4px 120px rgba(175, 173, 181, 0.15);
+    box-shadow: 0px 4px 120px $shadow-color;
     min-width: 100px;
     min-height: 100px;
     position: relative;
@@ -16,7 +17,7 @@
 }
 
 .multidropdown__header:focus {
-    border: 1px solid #518581;
+    border: 1px solid $primary-green;
 }
 
 .multidropdown__header:disabled {
@@ -24,18 +25,17 @@
 }
 
 .multidropdown__element{
-    font-family: 'Roboto', serif;
-    font-weight: 400;
+    @include p-text;
+    color: $primary-black;
     border-radius: 0;
     border-color: transparent;
     display: flex;
     padding-top: 17px;
     padding-bottom: 17px;
-    color: #000000;
-    font-size: 14px;
+
     text-align: center;
 }
 
 .multidropdown__element_selected{
-    color: #518581;
+    color: $primary-green;
 }

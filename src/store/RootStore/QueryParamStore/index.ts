@@ -1,1 +1,1 @@
-export {default} from "./QueryParamStore";
+export { default } from "./QueryParamStore";

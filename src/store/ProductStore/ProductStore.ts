@@ -3,11 +3,11 @@ import {
   getInitialCollectionModel,
   linearizeCollection,
   normalizeCollection
-} from '@models/shared/collectionModel';
-import { normalizeProductType, ProductTypeModel } from '@store/models';
-import { getProductList } from '@utils/fetchApi'
-import { Meta } from "@utils/meta";
-import { ILocalStore } from "@utils/useLocalStore";
+} from 'models/shared/collectionModel';
+import { normalizeProductType, ProductTypeModel } from 'store/models';
+import { getProductList } from 'utils/fetchApi'
+import { Meta } from "utils/meta";
+import { ILocalStore } from "utils/useLocalStore";
 import { action, computed, IReactionDisposer, makeObservable, observable, reaction, runInAction } from "mobx";
 
 import rootStore from "../RootStore/instance"
@@ -103,7 +103,7 @@ export default class ProductStore implements ILocalStore{
               { break }
             }
             this._meta = Meta.success;
-            this._products = normalizeCollection(list, (listItem => listItem.id));
+            this._products = normalizeCollection(list, ((listItem: { id: any; }) => listItem.id));
             if (rootStore.query.getParam('search')){
               this.searchProduct();
             }
@@ -128,7 +128,7 @@ export default class ProductStore implements ILocalStore{
   private readonly _qpReaction: IReactionDisposer = reaction(
     () => rootStore.query.getParam('search'),
     // eslint-disable-next-line no-console
-    (search) => {console.log("search value changed: ", search)}
+    (search) => { console.log("search value changed: ", search) }
     //здесь бы вставить функцию которая отгружает серч
   )
 
@@ -140,7 +140,7 @@ export default class ProductStore implements ILocalStore{
           // @ts-ignore
           product => product.title.toLowerCase().includes(searchTerm.toString().toLowerCase())
       )
-      this._products = normalizeCollection(filteredItems, (listItem => listItem.id));
+      this._products = normalizeCollection(filteredItems, ((listItem: { id: any; }) => listItem.id));
       }
     else {
       this.getProducts();
