@@ -138,13 +138,12 @@ const Products = () => {
               )
           )}
         {(productStore.meta===Meta.loading) && <Loader/>}
-        {(!productStore.hasMore) &&
-          <div>
-            больше нет!!
-          </div>
-        }
-
       </div>
+      {(!productStore.hasMore) &&
+        <div className={styles.product__total_heading}>
+          No more items
+        </div>
+      }
     </div>
   );
 };

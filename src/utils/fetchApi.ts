@@ -1,4 +1,4 @@
-import { ProductTypeApi } from '@store/models';
+import { ProductTypeApi } from 'store/models';
 import axios from "axios";
 
 const API = axios.create({

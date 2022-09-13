@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "../MetaclassProject",
+    "baseUrl": ".",
     "paths": {
       "components/*": [ "src/App/components/*"],
       "config/*": ["src/config/*"],

@@ -36,7 +36,7 @@ const ProductDetail = () => {
 
   return (
     <div>
-      {(productDetailStore.meta === Meta.error) && <div>Такого нет уходите</div>}
+      {(productDetailStore.meta === Meta.error) && <div className={styles.product__other}>Product not found</div>}
       {(productDetailStore.meta === Meta.loading) ? <Loader className={styles.product__loader}/> :
       (productDetailStore.product && productDetailStore.meta === Meta.success) &&
         <div className={styles.product__display}>
