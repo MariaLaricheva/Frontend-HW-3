@@ -1,0 +1,42 @@
+@import "styles/colors.scss";
+@import "styles/texts.scss";
+
+.card {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.card:hover{
+    opacity: 80%;
+}
+
+.card__img {
+    width: 360px;
+    height: 360px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.card__category {
+    @include p-text;
+    color: $secondary-gray;
+}
+
+.card__title {
+    @include bold-text;
+    font-size: 26px;
+    color: $primary-black;
+}
+
+.card__subtitle {
+    @include p-text;
+    color: $secondary-gray;
+}
+
+.card__price {
+    @include bold-text;
+    font-size: 24px;
+    color: $primary-black;
+}

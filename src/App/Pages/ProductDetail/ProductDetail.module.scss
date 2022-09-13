@@ -1,0 +1,76 @@
+@import "styles/colors.scss";
+@import "styles/texts.scss";
+
+.product__page{
+  width: 1440px;
+  margin: 0 auto;
+}
+
+
+.product__display{
+  margin: auto;
+  width: 800px;
+  display: flex;
+  justify-content: center; /*Центрирование по горизонтали*/
+  text-align: left;
+  gap: 60px;
+}
+
+.product__image{
+  width: 600px;
+}
+
+.product__name{
+  @include large-text;
+  text-align: left;
+}
+
+.product__category{
+  @include p-text;
+  color: $secondary-gray;
+
+}
+
+.product__description{
+  @include p-text;
+  color: $secondary-gray;
+}
+
+.product__price{
+  @include bold-text;
+  font-size: 44px;
+  color: $primary-black;
+}
+
+.product__actions{
+  display: flex;
+  justify-content: space-between; /*Центрирование по горизонтали*/
+  gap: 20px;
+}
+
+.product__actions__btn{
+  width: 285px;
+}
+
+.product__other{
+  @include bold-text;
+  font-size: 32px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: $primary-black;
+}
+
+.product__related{
+  margin: 0 auto;
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.product__loader{
+  margin: 200px auto 0;
+  display: flex;
+  justify-content: space-around;
+}

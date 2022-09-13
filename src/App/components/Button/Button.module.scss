@@ -1,0 +1,35 @@
+@import "styles/colors";
+@import "styles/texts.scss";
+
+.button_custom {
+    display: inline-block; //flex?
+    @include bold-text;
+    text-align: center;
+    size: 18px;
+
+    padding: 15px 28px;
+    gap: 100px;     /* отделял бы лоадер от текста по идее, если поменять дисплей на флексбокс */
+    border-color: transparent;
+}
+
+.button_color__primary {
+    background-color: $primary-green;
+    color: $primary-white;
+}
+
+
+.button_color__secondary {
+    background-color: $primary-white;
+    border: 2px solid $additional-lightgray;
+    color: $primary-black;
+}
+
+
+.button_custom:hover:enabled {
+    opacity: 0.7;
+}
+
+
+.button_custom:disabled {
+    background-color: $disabled-color;
+}

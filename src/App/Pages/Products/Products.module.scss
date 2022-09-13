@@ -1,0 +1,67 @@
+@import "styles/colors.scss";
+@import "styles/texts.scss";
+
+.product__page{
+  width: 1440px;
+  margin: 0 auto;
+}
+
+
+.product__heading {
+  @include bold-text;
+  font-size: 64px;
+  text-align: center;
+  color: $primary-black;
+  margin-bottom: 20px;
+}
+
+.product__paragraph {
+  width: 600px;
+  margin: auto;
+  @include p-text;
+  text-align: center;
+  color: $secondary-gray;
+  margin-bottom: 80px;
+}
+
+.product__search{
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between; /*Центрирование по горизонтали*/
+  width: 1230px;
+}
+
+.product__list{
+  margin: 0 auto;
+  width: 1200px;
+  display: flex;
+  justify-content: space-around;
+  /*можно попробовать space-evenly или space-between*/
+  align-items: center;     /*Центрирование по вертикали */
+  flex-wrap: wrap;
+}
+
+.product__total_wrapper{
+  display: flex;
+  justify-content: center; /*Центрирование по горизонтали*/
+  align-items: center;     /*Центрирование по вертикали */
+  gap: 40px;
+}
+
+.product__total_heading{
+  @include large-text;
+  text-align: center;
+}
+
+.product__total_value{
+  border-radius: 50%;
+
+  background-color: $additional-lightgray;
+  padding: 10px 15px;
+
+  @include bold-text;
+  font-size: 16px;
+  color: $primary-green;
+
+}

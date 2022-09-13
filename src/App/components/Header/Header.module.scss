@@ -1,0 +1,47 @@
+@import "styles/colors.scss";
+@import "styles/texts.scss";
+
+.header{
+  height: 120px;
+  border-bottom: 2px solid $additional-lightgray;
+  display: flex;
+  justify-content: space-around; /*Центрирование по горизонтали*/
+  /*можно попробовать space-evenly или space-between*/
+  align-items: center;     /*Центрирование по вертикали */
+  margin-bottom: 100px;
+}
+
+.header_left{
+  display: flex;
+  justify-content: center; /*Центрирование по горизонтали*/
+  align-items: center;     /*Центрирование по вертикали */
+}
+
+
+.header_img{
+  margin: 10px;
+}
+
+
+.header_right{
+  vertical-align: middle
+}
+
+.header_link{
+  vertical-align: middle;
+  @include p-text;
+  text-align: left;
+  color: $primary-black;
+  padding: 0 30px;
+  text-decoration: none;
+}
+
+.header_link__selected{
+  vertical-align: middle;
+  @include p-text;
+  padding: 0 30px;
+  text-decoration: none;
+  color: $primary-green;
+  padding-bottom: 49px;
+  border-bottom: 3px solid $primary-green;
+}

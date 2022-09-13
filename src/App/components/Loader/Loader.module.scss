@@ -1,0 +1,53 @@
+@import "styles/colors.scss";
+
+.loader_size_s {
+    height: 20px;
+    width: 20px;
+    border: 3px solid $primary-green;
+}
+
+.loader_size_m {
+    height: 40px;
+    width: 40px;
+    border: 4.5px solid $primary-green;
+}
+
+.loader_size_l {
+    height: 60px;
+    width: 60px;
+    border: 6px solid $primary-green;
+}
+
+.loader {
+    border-radius: 50%;
+    border-right-color: transparent;
+    display: inline-block;
+    box-sizing: border-box;
+    background: transparent;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/*
+.loader::after {
+    content: '';
+    position: absolute;
+
+    bottom: -8px;
+    left: -25px;
+
+    border-left: 43.3px solid transparent;
+    border-top: 25px solid transparent;
+    border-right: 43.3px solid white;
+    border-bottom: 25px solid transparent;
+}
+*/

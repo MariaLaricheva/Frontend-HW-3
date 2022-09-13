@@ -1,0 +1,36 @@
+@import "colors.scss";
+
+@font-face {
+  font-family: 'My Eudoxus Sans';
+  src: local('EudoxusSansGX'), url(static/font/variable/EudoxusSansGX.woff) format('woff');
+}
+
+@mixin large-text {
+  font: {
+    family: 'My Eudoxus Sans', SansSerif;
+    style: normal;
+    size: 44px;
+    weight: 700;
+  }
+  line-height: 130%;
+}
+
+@mixin p-text {
+  font: {
+    family: 'My Eudoxus Sans', SansSerif;
+    style: normal;
+    size: 18px;
+    weight: 500;
+  }
+  line-height: 180%;
+}
+
+@mixin bold-text {
+  font: {
+    family: 'My Eudoxus Sans', SansSerif;
+    style: normal;
+    weight: 700;
+  }
+
+  line-height: 130%;
+}

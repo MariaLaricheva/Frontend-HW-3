@@ -1,0 +1,59 @@
+@import "styles/colors.scss";
+@import "styles/texts.scss";
+
+.filter{
+    width: 190px;
+}
+
+.filter_header {
+    height: 84px;
+    background-color: $primary-white;
+    border-radius: 0;
+    border-color: transparent;
+    box-shadow: 0 4px 120px $shadow-color;
+    width: 100%;
+    position: relative;
+    @include p-text;
+    /* or 32px */
+    color: $primary-black;
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+    display: flex;
+    justify-content: center; /*Центрирование по горизонтали*/
+    /*можно попробовать space-evenly или space-between*/
+    align-items: center;     /*Центрирование по вертикали */
+}
+
+.filter_header:focus {
+    border: 1px solid $primary-green;
+}
+
+.filter_header:disabled {
+    opacity: 0.7;
+}
+
+.filter_options{
+    z-index: 10;
+    margin-top: 12px;
+    position: absolute;
+    width: 190px;
+}
+
+
+.filter_element{
+    position: relative;
+    width: 190px;
+    @include p-text;
+    border-radius: 0;
+    border-color: transparent;
+    padding: 17px 0;
+    color: $primary-black;
+    text-align: center;
+}
+
+.filter_element__selected{
+    color: $primary-green;
+}

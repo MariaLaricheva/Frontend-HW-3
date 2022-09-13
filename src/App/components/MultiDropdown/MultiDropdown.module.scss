@@ -1,0 +1,41 @@
+@import "styles/colors.scss";
+@import "styles/texts.scss";
+
+.multidropdown__header {
+    display: flex;
+    background-color: $additional-lightgray;
+    border-radius: 0;
+    border-color: transparent;
+    color: $primary-black;
+    @include p-text;
+    padding: 26px 62px;
+    box-shadow: 0px 4px 120px $shadow-color;
+    min-width: 100px;
+    min-height: 100px;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.multidropdown__header:focus {
+    border: 1px solid $primary-green;
+}
+
+.multidropdown__header:disabled {
+    opacity: 0.7;
+}
+
+.multidropdown__element{
+    @include p-text;
+    color: $primary-black;
+    border-radius: 0;
+    border-color: transparent;
+    display: flex;
+    padding-top: 17px;
+    padding-bottom: 17px;
+
+    text-align: center;
+}
+
+.multidropdown__element_selected{
+    color: $primary-green;
+}
