@@ -1,18 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-//const {postcss} = require("autoprefixer"); //в видео не было, вероятно случайно импортнулось
-const miniCssExtractPlugin = require('mini-css-extract-plugin')
-const TsCheckerPlugin = require('fork-ts-checker-webpack-plugin')
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const TsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 
 const srcPath = path.resolve(__dirname, 'src');
 const buildPath = path.resolve(__dirname, 'dist');
-
 const isProd = process.env.NODE_ENV === 'production';
 
 const getSettingsForStyles = (withModules = false) => {
-return [
-    miniCssExtractPlugin.loader,
+  return [
+    isProd? miniCssExtractPlugin.loader : 'style-loader',
     !withModules? 'css-loader': {
     loader: 'css-loader',
     options: {

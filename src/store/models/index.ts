@@ -1,2 +1,2 @@
-export * from "./optionType";
-export * from "./productType";
+export * from './optionType'
+export * from './productType'

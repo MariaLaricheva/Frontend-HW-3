@@ -1,5 +1,5 @@
-@import "styles/colors.scss";
-@import "styles/texts.scss";
+@import "styles/colors";
+@import "styles/texts";
 
 .header{
   height: 120px;
@@ -39,9 +39,8 @@
 .header_link__selected{
   vertical-align: middle;
   @include p-text;
-  padding: 0 30px;
+  padding: 0 30px 49px;
   text-decoration: none;
   color: $primary-green;
-  padding-bottom: 49px;
   border-bottom: 3px solid $primary-green;
 }

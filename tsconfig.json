@@ -15,7 +15,5 @@
     "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*" ],
-  "exclude": [
-    "../MetaclassProject/node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

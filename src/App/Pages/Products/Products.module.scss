@@ -1,5 +1,5 @@
-@import "styles/colors.scss";
-@import "styles/texts.scss";
+@import "styles/colors";
+@import "styles/texts";
 
 .product__page{
   width: 1440px;
@@ -17,11 +17,10 @@
 
 .product__paragraph {
   width: 600px;
-  margin: auto;
+  margin: auto auto 80px;
   @include p-text;
   text-align: center;
   color: $secondary-gray;
-  margin-bottom: 80px;
 }
 
 .product__search{

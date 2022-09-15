@@ -1,14 +1,15 @@
 @import "styles/colors";
-@import "styles/texts.scss";
+@import "styles/texts";
 
 .button_custom {
-    display: inline-block; //flex?
+    display: flex;
+    justify-content: space-around;
     @include bold-text;
     text-align: center;
     size: 18px;
 
     padding: 15px 28px;
-    gap: 100px;     /* отделял бы лоадер от текста по идее, если поменять дисплей на флексбокс */
+    gap: 100px;
     border-color: transparent;
 }
 

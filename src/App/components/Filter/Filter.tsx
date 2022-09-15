@@ -1,30 +1,30 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import filter_icon from "static/filter.svg";
-import classNames from "classnames";
+import filter_icon from 'static/filter.svg'
+import classNames from 'classnames'
 
-import styles from "./Filter.module.scss";
+import styles from './Filter.module.scss'
 
 /** Вариант для выбора в фильтре */
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
-  key: string;
+  key: string
   /** Значение варианта, отображается пользователю */
-  value: string;
-};
+  value: string
+}
 
 export type FilterProps = {
   /** Массив возможных вариантов для выбора */
-  options: Option[];
+  options: Option[]
   /** Текущие выбранные значения поля, массив может быть пустым */
-  value: Option[];
+  value: Option[]
   /** Callback, вызываемый при выборе варианта */
-  onChange: ([{ key, value }]: Option[]) => void;
+  onChange: ([{ key, value }]: Option[]) => void
   /** Заблокирован ли дропдаун */
-  disabled?: boolean;
+  disabled?: boolean
   /** Преобразовать выбранные значения в строку. Отображается в дропдауне в качестве выбранного значения */
-  pluralizeOptions: (value: Option[]) => string;
-};
+  pluralizeOptions: (value: Option[]) => string
+}
 
 const Filter: React.FC<FilterProps> = ({
   options,
@@ -33,40 +33,40 @@ const Filter: React.FC<FilterProps> = ({
   disabled,
   pluralizeOptions,
 }) => {
-  const [showOptions, setShowOptions] = useState(false);
+  const [showOptions, setShowOptions] = useState(false)
 
   React.useEffect(() => {
-    if (disabled) setShowOptions(false);
-  }, [disabled]);
+    if (disabled) setShowOptions(false)
+  }, [disabled])
 
   function toggleDropdown(): void {
     if (!disabled) {
-      setShowOptions(!showOptions);
+      setShowOptions(!showOptions)
     }
   }
 
   const isSelected = (option: Option) => {
-    let result = false;
+    let result = false
     value.forEach((el: Option) => {
       if (option.key === el.key) {
-        result = true;
+        result = true
       }
-    });
-    return result;
-  };
+    })
+    return result
+  }
 
   function changeValueArray(option: Option): void {
     //возвращаем изменившийся список наверх, не меняя его самого
-    let newValue: Option[] = [];
+    let newValue: Option[] = []
 
     if (value.some((element: Option) => element.key === option.key)) {
       //отфильтровать из value элемент option и положить в newValue
-      newValue = value.filter((element: Option) => element.key !== option.key);
+      newValue = value.filter((element: Option) => element.key !== option.key)
     } else {
       //newValue.concat(value, [option]);
-      newValue = [...value, option];
+      newValue = [...value, option]
     }
-    onChange(newValue);
+    onChange(newValue)
   }
 
   return (
@@ -84,13 +84,11 @@ const Filter: React.FC<FilterProps> = ({
           options.map((option) => (
             <button
               key={option.key}
-              className={classNames(styles.filter_element,
-              {
-                [styles.filter_element__selected] : isSelected(option),
-              }
-                )}
+              className={classNames(styles.filter_element, {
+                [styles.filter_element__selected]: isSelected(option),
+              })}
               onClick={() => {
-                changeValueArray(option);
+                changeValueArray(option)
               }}
             >
               {option.value}
@@ -98,11 +96,11 @@ const Filter: React.FC<FilterProps> = ({
           ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 Filter.defaultProps = {
   disabled: false,
-};
+}
 
-export default React.memo(Filter);
+export default React.memo(Filter)
