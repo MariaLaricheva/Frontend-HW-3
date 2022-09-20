@@ -1,0 +1,27 @@
+@import "styles/texts";
+@import "styles/colors";
+
+.about .title{
+  @include large-text;
+  text-align: center;
+}
+
+.about img{
+  display: block;
+  width: 30%;
+  height: 30%;
+  margin: auto;
+}
+
+.about .info{
+  @include p-text;
+  color: $primary-black;
+  text-align: center;
+}
+
+.about a {
+  @include p-text;
+  color: $primary-green;
+  padding: 3px;
+  text-decoration: none;
+}

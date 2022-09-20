@@ -1,0 +1,26 @@
+@import "styles/texts";
+@import "styles/colors";
+
+.services .title{
+  @include large-text;
+  text-align: center;
+}
+
+.services .info{
+  @include p-text;
+  color: $primary-black;
+  text-align: center;
+}
+
+.services .additional{
+  @include p-text;
+  color: $secondary-gray;
+  text-align: center;
+}
+
+.services a {
+  @include p-text;
+  color: $primary-green;
+  padding: 2px;
+  text-decoration: none;
+}

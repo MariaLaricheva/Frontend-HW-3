@@ -4,6 +4,7 @@
     "paths": {
       "components/*": [ "src/App/components/*"],
       "config/*": ["src/config/*"],
+      "context/*": ["src/context/*"],
       "static/*": ["src/static/*"],
       "store/*": ["src/store/*"],
       "styles/*": ["src/styles/*"],
