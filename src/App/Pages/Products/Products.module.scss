@@ -1,26 +1,26 @@
+@import "styles/colors";
+@import "styles/texts";
+
+.product__page{
+  width: 1440px;
+  margin: 0 auto;
+}
+
+
 .product__heading {
-  font-family: 'Eudoxus Sans', SansSerif, serif;
-  font-style: normal;
-  font-weight: 700;
+  @include bold-text;
   font-size: 64px;
-  line-height: 130%;
-  /* or 83px */
   text-align: center;
-  color: #151411;
+  color: $primary-black;
   margin-bottom: 20px;
 }
 
 .product__paragraph {
   width: 600px;
-  margin: auto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 180%;
-  /* or 32px */
+  margin: auto auto 80px;
+  @include p-text;
   text-align: center;
-  color: #AFADB5;
-  margin-bottom: 80px;
+  color: $secondary-gray;
 }
 
 .product__search{
@@ -44,32 +44,23 @@
 .product__total_wrapper{
   display: flex;
   justify-content: center; /*Центрирование по горизонтали*/
-  /*можно попробовать space-evenly или space-between*/
   align-items: center;     /*Центрирование по вертикали */
   gap: 40px;
 }
 
 .product__total_heading{
-  font-family: 'Eudoxus Sans', SansSerif, serif;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 180%;
-  /* or 32px */
-  color: #151411;
-  font-size: 28px;
+  @include large-text;
+  text-align: center;
 }
 
 .product__total_value{
-  font-size: 18px;
-  border-radius: 40%;
-  background-color: #AFADB5;
-  padding: 5px 15px;
+  border-radius: 50%;
 
-  font-family: 'Eudoxus Sans', SansSerif, serif;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 180%;
-  /* or 32px */
-  color: #151411;
+  background-color: $additional-lightgray;
+  padding: 10px 15px;
+
+  @include bold-text;
+  font-size: 16px;
+  color: $primary-green;
 
 }

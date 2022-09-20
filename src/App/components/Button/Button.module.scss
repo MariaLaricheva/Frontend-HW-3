@@ -1,30 +1,28 @@
-@import "@styles/colors";
+@import "styles/colors";
+@import "styles/texts";
 
 .button_custom {
-    display: inline-block; //flex?
-    font-size: 18px;
-    font-weight: 700;
-    font-family: 'Eudoxus Sans', serif;
-    line-height: 130%;
-    /* or 23px */
-    font-style: normal;
+    display: flex;
+    justify-content: space-around;
+    @include bold-text;
     text-align: center;
+    size: 18px;
 
     padding: 15px 28px;
-    gap: 100px;     /* отделял бы лоадер от текста по идее, если поменять дисплей на флексбокс */
+    gap: 100px;
     border-color: transparent;
 }
 
 .button_color__primary {
-    background-color: #518581;
-    color: white;
+    background-color: $primary-green;
+    color: $primary-white;
 }
 
 
 .button_color__secondary {
-    background-color: white;
-    border: 2px solid #F3F3F3;
-    color: #151411;
+    background-color: $primary-white;
+    border: 2px solid $additional-lightgray;
+    color: $primary-black;
 }
 
 
@@ -34,5 +32,5 @@
 
 
 .button_custom:disabled {
-    background-color: #D9D9D9;
+    background-color: $disabled-color;
 }

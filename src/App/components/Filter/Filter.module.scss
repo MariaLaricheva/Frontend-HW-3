@@ -1,22 +1,21 @@
+@import "styles/colors.scss";
+@import "styles/texts.scss";
+
 .filter{
     width: 190px;
 }
 
 .filter_header {
     height: 84px;
-    background-color: #ffffff;
+    background-color: $primary-white;
     border-radius: 0;
     border-color: transparent;
-    font-size: 18px;
-    box-shadow: 0px 4px 120px rgba(175, 173, 181, 0.15);
+    box-shadow: 0 4px 120px $shadow-color;
     width: 100%;
     position: relative;
-    font-family: 'Eudoxus Sans', SansSerif;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 180%;
+    @include p-text;
     /* or 32px */
-    color: #151411;
+    color: $primary-black;
     /* Inside auto layout */
     flex: none;
     order: 1;
@@ -29,7 +28,7 @@
 }
 
 .filter_header:focus {
-    border: 1px solid #518581;
+    border: 1px solid $primary-green;
 }
 
 .filter_header:disabled {
@@ -47,17 +46,14 @@
 .filter_element{
     position: relative;
     width: 190px;
-    font-family: 'Roboto', serif;
-    font-weight: 400;
+    @include p-text;
     border-radius: 0;
     border-color: transparent;
     padding: 17px 0;
-
-    color: #000000;
-    font-size: 14px;
+    color: $primary-black;
     text-align: center;
 }
 
 .filter_element__selected{
-    color: #518581;
+    color: $primary-green;
 }

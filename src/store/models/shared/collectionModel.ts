@@ -1,5 +1,5 @@
 export type CollectionModel<K extends string | number, T> = {
-  order: K[];
+  order: K[]
   entities: Record<K, T>
 }
 
@@ -7,7 +7,6 @@ export const getInitialCollectionModel = (): CollectionModel<any, any> => ({
   order: [],
   entities: {},
 })
-
 
 export const normalizeCollection = <K extends string | number, T>(
   elements: T[],
@@ -18,8 +17,7 @@ export const normalizeCollection = <K extends string | number, T>(
   elements.forEach((el, index) => {
     const id = getKeyFromElement(el)
     collection.order.push(id)
-    collection.entities[id] = el;
-
+    collection.entities[id] = el
   })
   return collection
 }

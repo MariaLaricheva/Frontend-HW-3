@@ -1,29 +1,29 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import classNames from "classnames";
+import classNames from 'classnames'
 
-import styles from "./MultiDropdown.module.scss";
+import styles from './MultiDropdown.module.scss'
 
 /** Вариант для выбора в фильтре */
 export type optionType = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
-  key: string;
+  key: string
   /** Значение варианта, отображается пользователю */
-  value: string;
-};
+  value: string
+}
 
 export type MultiDropdownProps = {
   /** Массив возможных вариантов для выбора */
-  options: optionType[];
+  options: optionType[]
   /** Текущие выбранные значения поля, массив может быть пустым */
-  value: optionType[];
+  value: optionType[]
   /** Callback, вызываемый при выборе варианта */
-  onChange: (options: optionType[]) => void;
+  onChange: (options: optionType[]) => void
   /** Заблокирован ли дропдаун */
-  disabled?: boolean;
+  disabled?: boolean
   /** Преобразовать выбранные значения в строку. Отображается в дропдауне в качестве выбранного значения */
-  pluralizeOptions: (value: optionType[]) => string;
-};
+  pluralizeOptions: (value: optionType[]) => string
+}
 
 export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   options,
@@ -32,40 +32,42 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   disabled,
   pluralizeOptions,
 }) => {
-  const [showOptions, setShowOptions] = useState(false);
+  const [showOptions, setShowOptions] = useState(false)
 
   React.useEffect(() => {
-    if (disabled) setShowOptions(false);
-  }, [disabled]);
+    if (disabled) setShowOptions(false)
+  }, [disabled])
 
   function toggleDropdown(): void {
     if (!disabled) {
-      setShowOptions(!showOptions);
+      setShowOptions(!showOptions)
     }
   }
 
   const isSelected = (option: optionType) => {
-    let result = false;
+    let result = false
     value.forEach((el: optionType) => {
       if (option.key === el.key) {
-        result = true;
+        result = true
       }
-    });
-    return result;
-  };
+    })
+    return result
+  }
 
   function changeValueArray(option: optionType): void {
     //возвращаем изменившийся список наверх, не меняя его самого
-    let newValue: optionType[] = [];
+    let newValue: optionType[] = []
 
     if (value.some((element: optionType) => element.key === option.key)) {
       //отфильтровать из value элемент option и положить в newValue
-      newValue = value.filter((element: optionType) => element.key !== option.key);
+      newValue = value.filter(
+        (element: optionType) => element.key !== option.key
+      )
     } else {
       //newValue.concat(value, [option]);
-      newValue = [...value, option];
+      newValue = [...value, option]
     }
-    onChange(newValue);
+    onChange(newValue)
   }
 
   return (
@@ -82,23 +84,23 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
         options.map((option) => (
           <button
             key={option.key}
-            style={{ width: "400px" }}
+            style={{ width: '400px' }}
             className={classNames([styles.multidropdown__element], {
               [styles.multidropdown__element_selected]: isSelected(option),
             })}
             onClick={() => {
-              changeValueArray(option);
+              changeValueArray(option)
             }}
           >
             {option.value}
           </button>
         ))}
     </>
-  );
-};
+  )
+}
 
 MultiDropdown.defaultProps = {
   disabled: false,
-};
+}
 
-export default MultiDropdown;
+export default MultiDropdown
