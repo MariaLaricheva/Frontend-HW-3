@@ -32,38 +32,18 @@ const User = () => {
   }, [])
 
   return (
-    <div>
-      <h1 className={styles.product__heading}>Account</h1>
+    <div className={styles.user}>
+      <h1 className={styles.heading}>Account</h1>
 
-      <div className={styles.registration__input}>
-        <Input
-          type="text"
-          placeholder="username"
-          value={''}
-          onChange={(e) => setUsername(e)}
-        />
-        <Input
-          type="text"
-          placeholder="email address"
-          value={''}
-          onChange={(e) => {setEmail(e)}}
-        />
-        <Input
-          type="text"
-          placeholder="phone number"
-          value={''}
-          onChange={(e) => {setPhone(e)}}
-        />
-        <Input
-          type="text"
-          placeholder="password"
-          value={''}
-          onChange={(e) => {setPassword(e)}}
-        />
+      <div className={styles.wrapper}>
+        <p className={styles.info}>Username: {userStore.user?.username}</p>
+        <p className={styles.info}>Email: {userStore.user?.email}</p>
+        <p className={styles.info}>Phone number: {userStore.user?.phone}</p>
+        <Button color={ButtonColor.primary} onClick={onLogout}>
+          Log out
+        </Button>
       </div>
-      <Button color={ButtonColor.primary} onClick={onLogout}>
-        Log out
-      </Button>
+
     </div>
   )
 }

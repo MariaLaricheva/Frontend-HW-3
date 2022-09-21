@@ -26,10 +26,10 @@ const Account = () => {
 
   if (userStore.user === null) {
   return (
-    <div>
-      <h1 className={styles.registration__heading}>Account</h1>
+    <div className={styles.account}>
+      <h1 className={styles.heading}>Account</h1>
 
-      <p className={styles.registration__input}>
+      <p className={styles.info}>
         It appears you are not logged in yet
       </p>
 

@@ -47,14 +47,15 @@ const Login = () => {
   }, [])
 
   return (
-    <div>
-      <h1 className={styles.registration__heading}>Login</h1>
+    <div className={styles.login}>
+      <h1 className={styles.heading}>Login</h1>
 
-      <Button color={ButtonColor.secondary} onClick={onRegister}>
-        Don't have an account? Register
-      </Button>
+        <Button color={ButtonColor.secondary}
+                onClick={onRegister}>
+          Don't have an account? Register
+        </Button>
 
-      <div className={styles.registration__input}>
+      <div className={styles.wrapper}>
         <Input
           type="text"
           placeholder="phone / email / username"
@@ -67,10 +68,12 @@ const Login = () => {
           value={password}
           onChange={(e) => {setPassword(e)}}
         />
-        <Button color={ButtonColor.primary} onClick={() => onLogin(username,password)}>
-          Log in
-        </Button>
+
       </div>
+      <Button color={ButtonColor.primary}
+              onClick={() => onLogin(username,password)}>
+          Log in
+      </Button>
     </div>
   )
 }

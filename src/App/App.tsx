@@ -12,6 +12,7 @@ import Registration from 'pages/Registration'
 import Login from 'pages/Login'
 import User from 'pages/User'
 import Account from 'pages/Account'
+import Cart from 'pages/Cart'
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

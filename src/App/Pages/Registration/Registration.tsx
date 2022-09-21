@@ -20,13 +20,12 @@ const Registration = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
 
-  useEffect(() => {
-    console.log(userStore.user)
-  }, [password])
 
   const Register = () => {
     if (username !== '' && email !== '' && phone !== '' && password !== '' && repeatPassword === password) {
       userStore.registrate({
+        //при регистрации не просится имя,
+        // по задумке их можно добавить в личном кабинете уже после регистрации
         name: {
           firstName: '',
           lastName: '',
@@ -49,14 +48,15 @@ const Registration = () => {
   }, [])
 
   return (
-    <div>
-      <h1 className={styles.registration__heading}>Registration</h1>
+    <div className={styles.register}>
+      <h1 className={styles.heading}>Registration</h1>
 
-      <Button color={ButtonColor.secondary} onClick={onLogin}>
+      <Button color={ButtonColor.secondary}
+              onClick={onLogin}>
         Already have an account? Log in
       </Button>
 
-      <div className={styles.registration__input}>
+      <div className={styles.wrapper}>
         <Input
           type="text"
           placeholder="username"

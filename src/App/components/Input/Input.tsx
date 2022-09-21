@@ -4,6 +4,7 @@ import classNames from 'classnames'
 
 import styles from './Input.module.scss'
 
+
 export type InputProps = {
   /** Значение поля */
   value: string
@@ -20,12 +21,14 @@ export type InputProps = {
 // без Omit onChange имеет смешанный тип, что вызывает конфликты
 // поэтому используем Omit, и он уберет из типа React.InputHTMLAttributes элемент onChange
 
+
 export const Input: React.FC<InputProps> = ({
   value,
   onChange,
   className,
   img,
   button,
+  size,
   ...props
 }) => {
   return (

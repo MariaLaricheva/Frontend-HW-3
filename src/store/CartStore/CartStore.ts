@@ -1,7 +1,7 @@
 import { ILocalStore } from 'utils/useLocalStore'
 import { Meta } from 'utils/meta'
 import { ProductTypeModel } from 'store/models'
-import { CollectionModel, getInitialCollectionModel } from 'models/shared/collectionModel'
+import { CollectionModel, getInitialCollectionModel, linearizeCollection } from 'models/shared/collectionModel'
 import { action, computed, makeObservable, observable } from 'mobx'
 import { cartItemType } from 'models/cartItemType'
 
@@ -18,8 +18,8 @@ export interface IProductDetailStore {
 export default class CartStore implements ILocalStore {
   private _meta: Meta = Meta.initial
   private _product: ProductTypeModel | null = null
-  private _cartItems: CollectionModel<number, cartItemType> =
-    getInitialCollectionModel()
+  private _cartItems: cartItemType[] =
+    []
   private _category = ''
 
   constructor() {
@@ -29,21 +29,69 @@ export default class CartStore implements ILocalStore {
       // computed - получаем в компонентах
       cartItems: computed,
       sum: computed,
+      length: computed,
       //actions - менять observable (переменные внутри стора)
-
-
-
-
+      addItem: action.bound,
     })
   }
 
   get sum () {
-    return 0;
+    let sum = 0;
+    this._cartItems.map(item => sum+=item.product.price*item.quantity)
+    return sum.toFixed(2);
+  }
+
+  get length () {
+    return this._cartItems.length;
   }
 
   get cartItems () {
     return this._cartItems
   }
 
-  destroy() {}
+  addItem(item: ProductTypeModel){
+    let isThereAnItem = false;
+    this._cartItems.map((product, index) => {
+      if (product.product.id === item.id){
+        product.quantity++
+        isThereAnItem = true
+      }
+    })
+    if (!isThereAnItem) {
+      this._cartItems.push({product: item, quantity: 1})
+    }
+  }
+
+  increaseQuantity(item: ProductTypeModel){
+    this._cartItems.map((product, index) => {
+      if (product.product.id === item.id){
+        product.quantity++
+      }
+    })
+  }
+
+  decreaseQuantity(item: ProductTypeModel){
+    this._cartItems.map((product, index) => {
+      if (product.product.id === item.id){
+        if (product.quantity === 1) {
+          this._cartItems.splice(index, 1)
+        }
+        else {
+          product.quantity--
+        }
+      }
+    })
+  }
+
+  deleteItem(item: ProductTypeModel){
+    this._cartItems.map((product, index) => {
+      if (product.product.id === item.id){
+          this._cartItems.splice(index, 1)
+      }
+    })
+  }
+
+  destroy(){
+
+  }
 }
