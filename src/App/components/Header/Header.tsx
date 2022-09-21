@@ -49,9 +49,14 @@ const Header = () => {
     }
   }, [])
 
+
+  const onLogoClick = useCallback(() => {
+    navigate(`/`, { replace: true })
+  }, [])
+
   return (
     <header className={styles.header}>
-      <div className={styles.header_left}>
+      <div className={styles.header_left} onClick={onLogoClick}>
         <img src={Logo} className={styles.header_img} alt={'logo'} />
         <img src={Name} className={styles.header_img} alt={'name'} />
       </div>
@@ -68,8 +73,12 @@ const Header = () => {
       </div>
 
       <div className={`${styles.header_right}`}>
-        <img src={Bag} className={styles.header_img} alt={'bag'} />
-        <img src={User} className={styles.header_img} alt={'user'} onClick={onUserClick}/>
+        <img src={Bag} className={classNames([styles.header_img], {
+          [styles.header_img_chosen]: isSelected('/cart')
+        })} alt={'bag'} />
+        <img src={User} className={classNames([styles.header_img], {
+          [styles.header_img_chosen]: isSelected('/account') || isSelected('/login') || isSelected('/register')
+        })} alt={'user'} onClick={onUserClick}/>
       </div>
     </header>
   )

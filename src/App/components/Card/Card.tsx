@@ -28,7 +28,7 @@ const Card: React.FC<CardProps> = ({
       <img src={image} alt="фото товара" className={styles.card__img} />
       <h1 className={styles.card__title}>{title}</h1>
       <h2 className={styles.card__subtitle}>{subtitle}</h2>
-      {content}
+      <h3 className={styles.card__price}>${content}</h3>
     </div>
   )
 }

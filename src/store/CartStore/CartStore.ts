@@ -27,14 +27,22 @@ export default class CartStore implements ILocalStore {
       // observable - отслеживаем внутри стора
       _cartItems: observable,
       // computed - получаем в компонентах
+      cartItems: computed,
       sum: computed,
       //actions - менять observable (переменные внутри стора)
+
+
+
 
     })
   }
 
   get sum () {
     return 0;
+  }
+
+  get cartItems () {
+    return this._cartItems
   }
 
   destroy() {}

@@ -12,6 +12,7 @@ import { observer } from 'mobx-react-lite'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import styles from './ProductDetail.module.scss'
+import Rating from 'components/Rating'
 
 const ProductDetail = () => {
   // Получаем из url id товара
@@ -60,6 +61,14 @@ const ProductDetail = () => {
               <p className={styles.product__description}>
                 {productDetailStore.product.description}
               </p>
+
+              <div>
+              <Rating rating={productDetailStore.product.rating.rate}/>
+                <p className={styles.product__description}>
+                  Based on {productDetailStore.product.rating.count} reviews
+                </p>
+              </div>
+
               <div className={styles.product__price}>
                 {'$' + productDetailStore.product.price}
               </div>
@@ -99,6 +108,7 @@ const ProductDetail = () => {
                       image={product.image}
                       title={product.title}
                       subtitle={product.category}
+                      content={product.price}
                       onClick={() => onCardClick(product)}
                     />
                   )

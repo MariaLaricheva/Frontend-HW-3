@@ -22,6 +22,11 @@
   margin: 10px;
 }
 
+.header_img_chosen{
+  margin: 10px;
+  filter: invert(1) sepia(80%) saturate(20) hue-rotate(95deg) brightness(45%);
+}
+
 
 .header_right{
   vertical-align: middle

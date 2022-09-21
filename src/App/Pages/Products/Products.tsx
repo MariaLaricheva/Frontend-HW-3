@@ -17,6 +17,8 @@ import { observer } from 'mobx-react-lite'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import styles from './Products.module.scss'
+import { getCategories } from 'utils/fetchApi'
+import { runInAction } from 'mobx'
 
 const Products = () => {
   useQueryParamStoreInit()
@@ -46,6 +48,7 @@ const Products = () => {
 
   useEffect(() => {
     productStore.getProducts()
+    fetch()
   }, []) //если убрать пустой массив, перезагрузка происходит каждые полсекунды
 
   useEffect(() => {
@@ -53,25 +56,25 @@ const Products = () => {
   }, [productStore, searchTerm]) // линтер сказал добавить productStore ??
 
   useEffect(() => {
-    fetch()
+    if (filter) {
+      productStore.setFilter(filter)
+      productStore.getProducts()
+    }
   }, [filter])
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(productStore.total)
-  }, [productStore.total])
 
   const fetch = async () => {
-    const result = await axios({
-      method: 'get',
-      url: 'https://fakestoreapi.com/products/categories',
+    const result = await getCategories();
+    runInAction(() => {
+      if (result.data) {
+      setCategories(
+        result.data.map((raw: string, index: number) => ({
+          key: index,
+          value: raw.toString(),
+        }))
+      )}
     })
-    setCategories(
-      result.data.map((raw: string, index: number) => ({
-        key: index,
-        value: raw.toString(),
-      }))
-    )
+
   }
 
   window.onscroll = function () {
@@ -134,10 +137,11 @@ const Products = () => {
                   title={product.title}
                   subtitle={product.category}
                   onClick={() => onCardClick(product)}
+                  content={product.price}
                 />
               )
           )}
-        {productStore.meta === Meta.loading && <Loader />}
+        {productStore.meta === Meta.loading && <Loader/>}
       </div>
       {!productStore.hasMore && (
         <div className={styles.product__total_heading}>No more items</div>
