@@ -2,6 +2,8 @@
 @import "styles/texts.scss";
 
 .input_custom {
+    height: 86px;
+    min-width: 300px;
     @include p-text;
     color: $secondary-gray;
     border: transparent;

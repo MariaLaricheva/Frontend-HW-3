@@ -12,8 +12,10 @@ import { observer } from 'mobx-react-lite'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import styles from './ProductDetail.module.scss'
+
 import Rating from 'components/Rating'
 import { useRootStore } from 'context/StoreContext'
+
 
 const ProductDetail = () => {
   // Получаем из url id товара
@@ -56,7 +58,9 @@ const ProductDetail = () => {
   )
 
   return (
+
     <div className={styles.product}>
+
       {productDetailStore.meta === Meta.error && (
         <div className={styles.product__other}>Product not found</div>
       )}
@@ -79,6 +83,7 @@ const ProductDetail = () => {
                 {productDetailStore.product.category}
               </h3>
 
+
               <div className={styles.rating}>
                 <h4 className={styles.heading}>
                   Rating
@@ -94,6 +99,7 @@ const ProductDetail = () => {
               </p>
 
 
+
               <div className={styles.product__price}>
                 {'$' + productDetailStore.product.price}
               </div>
@@ -101,14 +107,18 @@ const ProductDetail = () => {
                 <Button
                   color={ButtonColor.primary}
                   className={styles.product__actions__btn}
+
                   onClick={() => buyNow(productDetailStore.product)}
                 >Buy now
+
                 </Button>
                 <Button
                   color={ButtonColor.secondary}
                   className={styles.product__actions__btn}
+
                   onClick={() => addToCart(productDetailStore.product)}
                 >Add to Cart
+
                 </Button>
               </div>
             </div>
@@ -131,7 +141,9 @@ const ProductDetail = () => {
                       image={product.image}
                       title={product.title}
                       subtitle={product.category}
+
                       content={product.price}
+
                       onClick={() => onCardClick(product)}
                     />
                   )

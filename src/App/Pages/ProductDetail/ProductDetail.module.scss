@@ -33,14 +33,18 @@
 .product__description{
   @include p-text;
   color: $secondary-gray;
+
   margin-bottom: 30px;
+
 }
 
 .product__price{
   @include bold-text;
   font-size: 44px;
   color: $primary-black;
+
   margin-bottom: 50px;
+
 }
 
 .product__actions{
@@ -56,11 +60,13 @@
 .product__other{
   @include bold-text;
   font-size: 32px;
+
   text-align: start;
   width: 1200px;
   margin: 0 auto;
   color: $primary-black;
   margin-bottom: 30px;
+
 }
 
 .product__related{

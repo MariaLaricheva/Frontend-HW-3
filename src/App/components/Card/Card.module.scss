@@ -30,18 +30,24 @@
     @include bold-text;
     font-size: 26px;
     color: $primary-black;
+
     margin-bottom: 2px;
+
 }
 
 .card__subtitle {
     @include p-text;
     color: $secondary-gray;
+
     margin-bottom: 2px;
+
 }
 
 .card__price {
     @include bold-text;
     font-size: 24px;
     color: $primary-black;
+
     margin-bottom: 6px;
+
 }

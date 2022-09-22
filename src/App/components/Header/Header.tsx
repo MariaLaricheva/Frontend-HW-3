@@ -1,3 +1,4 @@
+
 import React, { useCallback } from 'react'
 
 import styles from 'components/Header/Header.module.scss'
@@ -12,10 +13,12 @@ import { ProductTypeModel } from 'store/models'
 import { useRootStore } from 'context/StoreContext'
 
 
+
 const Header = () => {
   function isSelected(address: string) {
     return window.location.pathname === address
   }
+
 
   const { userStore } = useRootStore()
 
@@ -61,10 +64,12 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.header_left} onClick={onLogoClick}>
+
         <img src={Logo} className={styles.header_img} alt={'logo'} />
         <img src={Name} className={styles.header_img} alt={'name'} />
       </div>
       <div>
+
         {Links.map((link) =>
           <Link
             to={link.address}
@@ -74,15 +79,18 @@ const Header = () => {
             {link.label}
           </Link>
         )}
+
       </div>
 
       <div className={`${styles.header_right}`}>
+
         <img src={Bag} className={classNames([styles.header_img], {
           [styles.header_img_chosen]: isSelected('/cart')
         })} alt={'bag'} onClick={onBagClick}/>
         <img src={User} className={classNames([styles.header_img], {
           [styles.header_img_chosen]: isSelected('/account') || isSelected('/login') || isSelected('/register')
         })} alt={'user'} onClick={onUserClick}/>
+
       </div>
     </header>
   )

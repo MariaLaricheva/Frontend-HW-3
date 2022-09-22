@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from 'components/Header'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+
 import { StoreProvider } from "../context/StoreContext";
 
 import ProductDetail from 'pages/ProductDetail'
@@ -35,6 +36,7 @@ const App = () => {
         </Routes>
       </BrowserRouter>
     </StoreProvider>
+
   )
 }
 

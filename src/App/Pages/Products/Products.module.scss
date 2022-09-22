@@ -1,7 +1,9 @@
 @import "styles/colors";
 @import "styles/texts";
 
+
 .product {
+
   width: 1440px;
   margin: 0 auto;
 }
@@ -44,7 +46,9 @@
 .product__total_wrapper{
   margin-left: 115px;
   display: flex;
+
   justify-content: flex-start; /*Центрирование по горизонтали*/
+
   align-items: center;     /*Центрирование по вертикали */
   gap: 40px;
 }

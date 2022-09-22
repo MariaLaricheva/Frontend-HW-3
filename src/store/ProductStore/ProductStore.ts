@@ -5,6 +5,7 @@ import {
   normalizeCollection,
 } from 'models/shared/collectionModel'
 import { normalizeProductType, ProductTypeModel } from 'store/models'
+
 import { getCategories, getProductList } from 'utils/fetchApi'
 import { Meta } from 'utils/meta'
 import { ILocalStore } from 'utils/useLocalStore'
@@ -35,9 +36,11 @@ export default class ProductStore implements ILocalStore {
   private _hasMore: boolean = true
   private _limit: number = 3
   private _total: number = 0
+
   private _ctgMeta: Meta = Meta.initial
   private _categories: optionType[] = []
   private _filter: optionType [] = []
+
 
   constructor() {
     makeObservable<ProductStore, PrivateFields>(this, {
@@ -63,18 +66,22 @@ export default class ProductStore implements ILocalStore {
       getProducts: action.bound,
       fetchMore: action.bound,
       toggleHasMore: action.bound,
+
       setFilter: action.bound,
       fetchCategories: action.bound,
+
       //reactions
     })
   }
 
   get meta(): Meta {
     return this._meta
+
   }
 
   get ctgMeta(): Meta {
     return this._ctgMeta
+
   }
 
   get products(): ProductTypeModel[] {
@@ -151,6 +158,7 @@ export default class ProductStore implements ILocalStore {
       console.log("no filter")
       this.getProducts()
     }
+
   }
 
   async getProducts() {
@@ -179,9 +187,11 @@ export default class ProductStore implements ILocalStore {
           if (rootStore.query.getParam('search')) {
             this.searchProduct()
           }
+
           if (this.filter.length !== 0) {
             this.filterProduct()
           }
+
           return
         }
       })
@@ -223,7 +233,9 @@ export default class ProductStore implements ILocalStore {
     //здесь бы вставить функцию которая отгружает серч
   )
 
+
   destroy() {
     this._qpReaction()
+
   }
 }

@@ -17,8 +17,10 @@ import { observer } from 'mobx-react-lite'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import styles from './Products.module.scss'
+
 import { getCategories } from 'utils/fetchApi'
 import { runInAction } from 'mobx'
+
 
 const Products = () => {
   useQueryParamStoreInit()
@@ -48,7 +50,9 @@ const Products = () => {
 
   useEffect(() => {
     productStore.getProducts()
+
     fetch()
+
   }, []) //если убрать пустой массив, перезагрузка происходит каждые полсекунды
 
   useEffect(() => {
@@ -56,12 +60,12 @@ const Products = () => {
   }, [productStore, searchTerm]) // линтер сказал добавить productStore ??
 
   useEffect(() => {
+
     if (filter) {
       productStore.setFilter(filter)
       productStore.getProducts()
     }
   }, [filter])
-
 
   const fetch = async () => {
     const result = await getCategories();
@@ -74,7 +78,6 @@ const Products = () => {
         }))
       )}
     })
-
   }
 
   window.onscroll = function () {
@@ -141,7 +144,10 @@ const Products = () => {
                 />
               )
           )}
+
         {productStore.meta === Meta.loading && <Loader/>}
+
+
       </div>
       {!productStore.hasMore && (
         <div className={styles.product__total_heading}>No more items</div>
