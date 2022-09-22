@@ -92,7 +92,7 @@ const Products = () => {
   }, [])
 
   return (
-    <div>
+    <div className={styles.product}>
       <h1 className={styles.product__heading}>Products</h1>
       <p className={styles.product__paragraph}>
         We display products based on the latest products we have, if you want to

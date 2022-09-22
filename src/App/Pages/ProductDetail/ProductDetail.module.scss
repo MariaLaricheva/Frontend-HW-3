@@ -6,9 +6,8 @@
   margin: 0 auto;
 }
 
-
 .product__display{
-  margin: auto;
+  margin: 0 auto 50px;
   width: 800px;
   display: flex;
   justify-content: center; /*Центрирование по горизонтали*/
@@ -34,12 +33,14 @@
 .product__description{
   @include p-text;
   color: $secondary-gray;
+  margin-bottom: 30px;
 }
 
 .product__price{
   @include bold-text;
   font-size: 44px;
   color: $primary-black;
+  margin-bottom: 50px;
 }
 
 .product__actions{
@@ -55,9 +56,11 @@
 .product__other{
   @include bold-text;
   font-size: 32px;
-  letter-spacing: 0.01em;
-  text-align: center;
+  text-align: start;
+  width: 1200px;
+  margin: 0 auto;
   color: $primary-black;
+  margin-bottom: 30px;
 }
 
 .product__related{
@@ -69,8 +72,28 @@
   flex-wrap: wrap;
 }
 
+
 .product__loader{
   margin: 200px auto 0;
   display: flex;
   justify-content: space-around;
+}
+
+
+.product .rating {
+  @include bold-text;
+  font-size: 20px;
+  color: $primary-black;
+}
+
+.product .rating .heading {
+  @include bold-text;
+  font-size: 24px;
+  color: $primary-black;
+}
+
+.product .rating .info {
+  @include p-text;
+  font-size: 20px;
+  color: $primary-black;
 }

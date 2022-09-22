@@ -56,7 +56,7 @@ const ProductDetail = () => {
   )
 
   return (
-    <div>
+    <div className={styles.product}>
       {productDetailStore.meta === Meta.error && (
         <div className={styles.product__other}>Product not found</div>
       )}
@@ -78,16 +78,21 @@ const ProductDetail = () => {
               <h3 className={styles.product__category}>
                 {productDetailStore.product.category}
               </h3>
+
+              <div className={styles.rating}>
+                <h4 className={styles.heading}>
+                  Rating
+                </h4>
+                <Rating rating={productDetailStore.product.rating.rate}/>
+                <p className={styles.info}>
+                  Based on {productDetailStore.product.rating.count} reviews
+                </p>
+              </div>
+
               <p className={styles.product__description}>
                 {productDetailStore.product.description}
               </p>
 
-              <div>
-              <Rating rating={productDetailStore.product.rating.rate}/>
-                <p className={styles.product__description}>
-                  Based on {productDetailStore.product.rating.count} reviews
-                </p>
-              </div>
 
               <div className={styles.product__price}>
                 {'$' + productDetailStore.product.price}

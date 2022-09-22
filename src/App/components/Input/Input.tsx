@@ -32,15 +32,14 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   return (
-    <div className={styles.searchbar}>
+    <div className={classNames(styles.searchbar, className)}>
       {img && <img src={img} alt={'иконка'} className={styles.searchbar_img} />}
       <input
         type="text"
         className={classNames(
           [styles.input_custom],
           { [styles.input_disabled]: props.disabled },
-          [styles.searchbar_input],
-          className
+          [styles.searchbar_input]
         )}
         value={value}
         onChange={(e) => onChange(e.target.value)} // onChange = handleChange
