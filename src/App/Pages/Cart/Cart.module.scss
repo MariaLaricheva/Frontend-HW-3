@@ -1,0 +1,66 @@
+@import "styles/colors";
+@import "styles/texts";
+
+.cart{
+  width: 1440px;
+  margin: 0 auto;
+}
+
+
+.cart .heading {
+  @include bold-text;
+  font-size: 64px;
+  text-align: center;
+  color: $primary-black;
+  margin-bottom: 40px;
+}
+
+.cart .price {
+  @include bold-text;
+  font-size: 24px;
+  text-align: center;
+  color: $primary-black;
+}
+
+.cart .item{
+  display: flex;
+  justify-content: space-between;
+  /*можно попробовать space-evenly или space-between*/
+  align-items: center;     /*Центрирование по вертикали */
+  flex-wrap: wrap;
+
+  margin-bottom: 50px;
+}
+
+.cart .title{
+  @include bold-text;
+  text-align: center;
+  font-size: 24px;
+  color: $primary-black;
+}
+
+.cart .item .picture{
+  width: 100px;
+  height: 100px;
+}
+
+.button_group{
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  /*можно попробовать space-evenly или space-between*/
+  align-items: center;     /*Центрирование по вертикали */
+  flex-wrap: wrap;
+}
+
+.cart .total{
+  @include bold-text;
+  font-size: 44px;
+  text-align: start;
+  color: $primary-black;
+  margin-bottom: 20px;
+}
+
+.cart Button{
+  margin: 0 auto;
+}

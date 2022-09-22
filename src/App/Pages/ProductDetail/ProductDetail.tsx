@@ -13,12 +13,35 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import styles from './ProductDetail.module.scss'
 
+import Rating from 'components/Rating'
+import { useRootStore } from 'context/StoreContext'
+
+
 const ProductDetail = () => {
   // Получаем из url id товара
   // (id, поскольку записали :id в path роута)
   const { id } = useParams()
 
   const productDetailStore = useLocalStore(() => new ProductDetailStore())
+  const { cartStore } = useRootStore()
+
+  const addToCart = React.useCallback(
+    (product: ProductTypeModel | null) =>
+    {
+      console.log("adding to cart")
+      if (product) {
+        cartStore.addItem(product)
+      }
+    }, [])
+
+  const buyNow = React.useCallback(
+    (product: ProductTypeModel | null) => {
+      console.log("buying now")
+      if (product) {
+        cartStore.addItem(product)
+        navigate(`/cart`, { replace: true })
+      }
+    },    [])
 
   useEffect(() => {
     if (id) {
@@ -35,7 +58,9 @@ const ProductDetail = () => {
   )
 
   return (
-    <div>
+
+    <div className={styles.product}>
+
       {productDetailStore.meta === Meta.error && (
         <div className={styles.product__other}>Product not found</div>
       )}
@@ -57,9 +82,24 @@ const ProductDetail = () => {
               <h3 className={styles.product__category}>
                 {productDetailStore.product.category}
               </h3>
+
+
+              <div className={styles.rating}>
+                <h4 className={styles.heading}>
+                  Rating
+                </h4>
+                <Rating rating={productDetailStore.product.rating.rate}/>
+                <p className={styles.info}>
+                  Based on {productDetailStore.product.rating.count} reviews
+                </p>
+              </div>
+
               <p className={styles.product__description}>
                 {productDetailStore.product.description}
               </p>
+
+
+
               <div className={styles.product__price}>
                 {'$' + productDetailStore.product.price}
               </div>
@@ -67,16 +107,18 @@ const ProductDetail = () => {
                 <Button
                   color={ButtonColor.primary}
                   className={styles.product__actions__btn}
-                >
-                  {' '}
-                  Buy now{' '}
+
+                  onClick={() => buyNow(productDetailStore.product)}
+                >Buy now
+
                 </Button>
                 <Button
                   color={ButtonColor.secondary}
                   className={styles.product__actions__btn}
-                >
-                  {' '}
-                  Add to chart{' '}
+
+                  onClick={() => addToCart(productDetailStore.product)}
+                >Add to Cart
+
                 </Button>
               </div>
             </div>
@@ -99,6 +141,9 @@ const ProductDetail = () => {
                       image={product.image}
                       title={product.title}
                       subtitle={product.category}
+
+                      content={product.price}
+
                       onClick={() => onCardClick(product)}
                     />
                   )

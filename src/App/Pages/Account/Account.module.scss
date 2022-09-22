@@ -1,0 +1,27 @@
+@import "styles/colors";
+@import "styles/texts";
+
+.account{
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.account .heading {
+  @include bold-text;
+  font-size: 64px;
+  text-align: center;
+  color: $primary-black;
+  margin-bottom: 20px;
+}
+
+.account .info {
+  @include p-text;
+  font-size: 24px;
+  text-align: center;
+  color: $primary-black;
+  margin-bottom: 20px;
+}
+
+.account Button {
+  margin: 30px auto;
+}

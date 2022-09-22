@@ -1,0 +1,27 @@
+@import "styles/colors";
+@import "styles/texts";
+
+.register{
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.register .wrapper {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 0 210px;
+}
+
+.register .heading {
+  @include bold-text;
+  font-size: 64px;
+  text-align: center;
+  color: $primary-black;
+  margin-bottom: 20px;
+}
+
+.register Button {
+  margin: 30px auto;
+}

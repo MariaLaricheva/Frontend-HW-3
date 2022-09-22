@@ -1,0 +1,28 @@
+@import "styles/colors";
+@import "styles/texts";
+
+.combinator{
+    position: relative;
+    height: 50px;
+}
+
+.rating {
+    position: absolute;
+    display: flex;
+    justify-content: flex-start; /*Центрирование по горизонтали*/
+    align-items: center;
+    gap: 5px;
+}
+
+.rating_star {
+    width: 50px;
+}
+
+.rating_star_none {
+    width: 50px;
+    filter: grayscale(100%);
+}
+
+.rating_cutter {
+    overflow:hidden;
+}

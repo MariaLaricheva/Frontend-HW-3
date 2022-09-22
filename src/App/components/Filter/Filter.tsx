@@ -31,7 +31,6 @@ const Filter: React.FC<FilterProps> = ({
   value,
   onChange,
   disabled,
-  pluralizeOptions,
 }) => {
   const [showOptions, setShowOptions] = useState(false)
 

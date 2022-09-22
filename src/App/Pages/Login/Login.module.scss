@@ -1,0 +1,28 @@
+@import "styles/colors";
+@import "styles/texts";
+
+.login{
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.login .wrapper {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 0 210px;
+}
+
+.login .heading {
+  @include bold-text;
+  font-size: 64px;
+  text-align: center;
+  color: $primary-black;
+  margin-bottom: 20px;
+}
+
+.login Button {
+  margin: 30px auto;
+}
+

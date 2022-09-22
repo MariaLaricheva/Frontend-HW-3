@@ -1,7 +1,9 @@
 @import "styles/colors";
 @import "styles/texts";
 
-.product__page{
+
+.product {
+
   width: 1440px;
   margin: 0 auto;
 }
@@ -35,15 +37,18 @@
   margin: 0 auto;
   width: 1200px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   /*можно попробовать space-evenly или space-between*/
-  align-items: center;     /*Центрирование по вертикали */
+  align-items: flex-start;     /*Центрирование по вертикали */
   flex-wrap: wrap;
 }
 
 .product__total_wrapper{
+  margin-left: 115px;
   display: flex;
-  justify-content: center; /*Центрирование по горизонтали*/
+
+  justify-content: flex-start; /*Центрирование по горизонтали*/
+
   align-items: center;     /*Центрирование по вертикали */
   gap: 40px;
 }
