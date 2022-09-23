@@ -16,9 +16,16 @@ export interface IProductDetailStore {
 }
  */
 
+const storageUser = JSON.parse(localStorage.getItem('u') || 'null')
+//почему-то когда key = 'user', в браузере выпадает ошибка
+//мол json не может найти элемент с key = u
+
 export default class UserStore implements ILocalStore {
   private _meta: Meta = Meta.initial
-  private _user: UserTypeModel | null = null
+  private _user: UserTypeModel | null =
+    storageUser !== null
+      ? storageUser
+      : null
 
   constructor() {
     makeObservable<UserStore, PrivateFields>(this, {
@@ -41,9 +48,8 @@ export default class UserStore implements ILocalStore {
     return this._user
   }
 
-  registrate(user: UserTypeModel) {
+  register(user: UserTypeModel) {
     this._meta = Meta.loading;
-    console.log("регистрация")
     this._user = {
       id: user.id,
       username: user.username,
@@ -59,6 +65,7 @@ export default class UserStore implements ILocalStore {
       phone: user.phone,
     }
     this._meta = Meta.success;
+    localStorage.setItem('u', JSON.stringify(user))
     //по идее сейчас менять мету здесь нет смысла т.к. нет асинхронности но
     //если бы у нас была работающая регистрация в api,
     //надо было бы отправлять запрос на сервер
@@ -66,36 +73,28 @@ export default class UserStore implements ILocalStore {
 
   async login(login: string, password: string) {
     this._meta = Meta.loading;
-
-    console.log("trying to log in")
     try {
       const response = await getUsers()
       runInAction(() => {
         if (!response.data) {
           this._meta = Meta.error
           this._user = null;
-          console.log("no data oooops")
         } else {
           response.data.map((user: UserTypeApi) => {
             if (login === user.email || login === user.phone || login === user.username) {
-              console.log("found the guy")
               if (password === user.password){
                 this._meta = Meta.success
                 this._user = normalizeUserType(user)
-                console.log("password's right fuck yes")
-                console.log(user)
-                console.log("user:", this.user?.name.firstName, this.user?.name.lastName)
+                localStorage.setItem('u', JSON.stringify(user))
               }
               else {
                 this._meta = Meta.error
-                console.log("wrong password bro")
               }
-                            //если пользователь нашёлся, то не надо идти дальше по циклу,
+              //если пользователь нашёлся, то не надо идти дальше по циклу,
               //независимо от того, правильный пароль или нет
               return
             }
           })
-          console.log("haven found the guy")
           if (this._user === null) {
             this._meta = Meta.error
           }
@@ -111,6 +110,7 @@ export default class UserStore implements ILocalStore {
 
   logout(){
     this._user = null;
+    localStorage.setItem('u', JSON.stringify(this._user))
   }
 
 

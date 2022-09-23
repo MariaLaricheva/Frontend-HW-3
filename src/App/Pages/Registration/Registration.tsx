@@ -23,7 +23,7 @@ const Registration = () => {
 
   const Register = () => {
     if (username !== '' && email !== '' && phone !== '' && password !== '' && repeatPassword === password) {
-      userStore.registrate({
+      userStore.register({
         //при регистрации не просится имя,
         // по задумке их можно добавить в личном кабинете уже после регистрации
         name: {

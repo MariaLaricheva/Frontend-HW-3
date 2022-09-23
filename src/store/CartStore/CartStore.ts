@@ -7,6 +7,7 @@ import { cartItemType } from 'models/cartItemType'
 
 type PrivateFields =
   | '_cartItems'
+  | '_meta'
 
 
 /* если нужен - добавить в имплемент после айЛокалСтор
@@ -14,18 +15,24 @@ export interface IProductDetailStore {
   getProductDetailByID: (id: string | number) => Promise<void>
 }
  */
+const storageCart = JSON.parse(localStorage.getItem('c') || 'null')
+//почему-то когда key = 'user', в браузере выпадает ошибка
+//мол json не может найти элемент с key = u
+
 
 export default class CartStore implements ILocalStore {
   private _meta: Meta = Meta.initial
-  private _product: ProductTypeModel | null = null
   private _cartItems: cartItemType[] =
-    []
+    storageCart !== null
+      ? storageCart
+      : []
   private _category = ''
 
   constructor() {
     makeObservable<CartStore, PrivateFields>(this, {
       // observable - отслеживаем внутри стора
       _cartItems: observable,
+      _meta: observable,
       // computed - получаем в компонентах
       cartItems: computed,
       sum: computed,
@@ -60,6 +67,16 @@ export default class CartStore implements ILocalStore {
     if (!isThereAnItem) {
       this._cartItems.push({product: item, quantity: 1})
     }
+    this.updateLocalStorage()
+  }
+
+  updateLocalStorage () {
+    if (this._cartItems.length === 0) {
+      localStorage.setItem('c', 'null')
+    }
+    else {
+      localStorage.setItem('c', JSON.stringify(this._cartItems))
+    }
   }
 
   increaseQuantity(item: ProductTypeModel){
@@ -68,6 +85,7 @@ export default class CartStore implements ILocalStore {
         product.quantity++
       }
     })
+    this.updateLocalStorage()
   }
 
   decreaseQuantity(item: ProductTypeModel){
@@ -81,6 +99,7 @@ export default class CartStore implements ILocalStore {
         }
       }
     })
+    this.updateLocalStorage()
   }
 
   deleteItem(item: ProductTypeModel){
@@ -89,6 +108,7 @@ export default class CartStore implements ILocalStore {
           this._cartItems.splice(index, 1)
       }
     })
+    this.updateLocalStorage()
   }
 
   destroy(){
