@@ -12,7 +12,11 @@ const About = () => {
       </h2>
         <p className={styles.info}>
         This website was made by Maria Laricheva during her studies at <a href="https://metaclass.kts.studio/">Metaclass</a>
-      </p>
+        </p>
+
+        <p className={styles.info}>
+          If you like what you see, consider checking out <a href="https://marialaricheva.github.io/Portfolio">my portfolio</a>
+        </p>
         <img src={ktsCats}/>
     </div>
   )

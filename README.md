@@ -1,4 +1,4 @@
-# Метаклассовый проект со своей сборкой
+# E-commerce Project
 
 ## Available Scripts
 
@@ -13,7 +13,7 @@ You will also see any lint errors in the console.
 
 ### `build`
 
-Runs the app in the production mode, i guess?\
+Builds project for production 
 
 ### `ts-check`
 
@@ -29,4 +29,4 @@ Fixes mistakes automatically
 
 ## Learn More
 
-The whole project now builds with webpack sooooooo i hope it doesn't break or smth
+The whole project is built with webpack to be accessible for various browsers
