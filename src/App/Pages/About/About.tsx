@@ -15,7 +15,7 @@ const About = () => {
         </p>
 
         <p className={styles.info}>
-          If you like what you see, consider checking out <a href="https://marialaricheva.github.io/Portfolio">my portfolio</a>
+          If you like what you see, consider checking out <a href="https://mvlaricheva.netlify.app/">my portfolio</a>
         </p>
         <img src={ktsCats}/>
     </div>
